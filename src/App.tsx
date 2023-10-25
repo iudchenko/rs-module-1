@@ -4,25 +4,7 @@ import Results from "./components/Results";
 import AppWrapper from "./components/AppWrapper";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ErrorButton from "./components/ErrorButton";
-
-export interface Person {
-  birth_year: string;
-  eye_color: string;
-  films: string[];
-  gender: string;
-  hair_color: string;
-  height: string;
-  homeworld: string;
-  mass: string;
-  name: string;
-  skin_color: string;
-  created: string;
-  edited: string;
-  species: string[];
-  starships: string[];
-  url: string;
-  vehicles: string[];
-}
+import { Person } from "./interfaces/interfaces";
 
 type AppProps = {};
 
@@ -57,7 +39,6 @@ export class App extends Component<AppProps, AppState> {
   }
 
   fetchData(searchTerm: string) {
-    // this.handleStatus('loading');
     this.setState({ status: AppStatus.loading });
     // Cancel the previous request, if any
     this.abortController.abort();

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Spinner from "./Spinner";
 import Character from "./Character";
-import { Person } from "../App";
+import { Person } from "../interfaces/interfaces";
 
 interface ResultsProps {
   status: string;

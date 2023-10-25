@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Person } from '../App';
+import React, { Component } from "react";
+import { Person } from "../interfaces/interfaces";
 
 type CharacterProps = {
   character: Person;

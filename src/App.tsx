@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import SearchBar from './components/SearchBar';
-import Results from './components/Results';
-import AppWrapper from './components/AppWrapper';
-import ErrorBoundary from './components/ErrorBoundary';
-import ErrorButton from './components/ErrorButton';
+import React, { Component } from "react";
+import SearchBar from "./components/SearchBar";
+import Results from "./components/Results";
+import AppWrapper from "./components/AppWrapper";
+import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorButton from "./components/ErrorButton";
 
 export interface Person {
   birth_year: string;
@@ -26,10 +26,16 @@ export interface Person {
 
 type AppProps = {};
 
+export enum AppStatus {
+  active = "active",
+  loading = "loading",
+  error = "error",
+}
+
 type AppState = {
   searchTerm: string;
   results: Person[];
-  status: string;
+  status: AppStatus;
 };
 
 export class App extends Component<AppProps, AppState> {
@@ -40,19 +46,19 @@ export class App extends Component<AppProps, AppState> {
     this.state = {
       searchTerm: this.getInitialSearchTerm(),
       results: [],
-      status: 'active', // active, loading, error
+      status: AppStatus.active, // active, loading, error
     };
     this.abortController = new AbortController();
   }
 
   componentDidMount() {
-    this.handleStatus('loading');
+    this.handleStatus(AppStatus.loading);
     this.fetchData(this.state.searchTerm);
   }
 
   fetchData(searchTerm: string) {
     // this.handleStatus('loading');
-    this.setState({ status: 'loading' });
+    this.setState({ status: AppStatus.loading });
     // Cancel the previous request, if any
     this.abortController.abort();
 
@@ -72,34 +78,34 @@ export class App extends Component<AppProps, AppState> {
         });
       })
       .then(() => {
-        this.setState({ status: 'active' });
+        this.setState({ status: AppStatus.active });
       })
       .catch((err) => {
-        if (err.name === 'AbortError') {
-          console.log('Request was aborted.');
+        if (err.name === "AbortError") {
+          console.log("Request was aborted.");
         } else {
           console.error(err);
-          this.setState({ status: 'error' });
+          this.setState({ status: AppStatus.error });
         }
       });
   }
 
   getInitialSearchTerm() {
-    const searchTerm = window.localStorage.getItem('searchTerm');
-    return searchTerm ? searchTerm : '';
+    const searchTerm = window.localStorage.getItem("searchTerm");
+    return searchTerm ? searchTerm : "";
   }
 
   handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
     const searchTerm = e.target.value;
     this.setState({ searchTerm });
-    window.localStorage.setItem('searchTerm', searchTerm);
+    window.localStorage.setItem("searchTerm", searchTerm);
   }
 
   handleSearch() {
     this.fetchData(this.state.searchTerm.trim());
   }
 
-  handleStatus(status: string) {
+  handleStatus(status: AppStatus) {
     this.setState({ status });
   }
 
@@ -109,7 +115,7 @@ export class App extends Component<AppProps, AppState> {
         <AppWrapper>
           <SearchBar
             searchTerm={this.state.searchTerm}
-            onLoading={() => this.handleStatus('loading')}
+            onLoading={() => this.handleStatus(AppStatus.loading)}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               this.handleSearchTermChange(e)
             }

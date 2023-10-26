@@ -9103,22 +9103,31 @@ class Id extends Me.Component {
       birth_year: o,
     } = this.props.character;
     return P.jsxs('li', {
-      className: 'flex grow w-full gap-2 p-2 bg-white rounded-lg',
+      className:
+        'flex items-center grow w-full gap-5 p-2 bg-gray-900/50 text-white rounded-lg',
       children: [
-        P.jsxs('p', {
-          children: [P.jsx('strong', { children: 'Name:' }), ' ', t],
+        P.jsx('div', {
+          children: P.jsx('h2', {
+            className: 'text-xl font-bold',
+            children: t,
+          }),
         }),
-        P.jsxs('p', {
-          children: [P.jsx('strong', { children: 'Gender:' }), ' ', n],
-        }),
-        P.jsxs('p', {
-          children: [P.jsx('strong', { children: 'Height:' }), ' ', r],
-        }),
-        P.jsxs('p', {
-          children: [P.jsx('strong', { children: 'Mass:' }), ' ', l],
-        }),
-        P.jsxs('p', {
-          children: [P.jsx('strong', { children: 'Birth Year:' }), ' ', o],
+        P.jsxs('div', {
+          className: 'flex gap-2 text-white/80',
+          children: [
+            P.jsxs('p', {
+              children: [P.jsx('strong', { children: 'Gender:' }), ' ', n],
+            }),
+            P.jsxs('p', {
+              children: [P.jsx('strong', { children: 'Height:' }), ' ', r],
+            }),
+            P.jsxs('p', {
+              children: [P.jsx('strong', { children: 'Mass:' }), ' ', l],
+            }),
+            P.jsxs('p', {
+              children: [P.jsx('strong', { children: 'Birth Year:' }), ' ', o],
+            }),
+          ],
         }),
       ],
     });

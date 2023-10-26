@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo } from "react";
+import React, { Component, ErrorInfo } from 'react';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({ hasError: true });
     // You can log the error or perform any other error handling here
-    console.error("Error caught by error boundary:", error, errorInfo);
+    console.error('Error caught by error boundary:', error, errorInfo);
   }
 
   render() {

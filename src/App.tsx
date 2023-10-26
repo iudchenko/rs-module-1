@@ -1,17 +1,15 @@
-import React, { Component } from "react";
-import SearchBar from "./components/SearchBar";
-import Results from "./components/Results";
-import AppWrapper from "./components/AppWrapper";
-import ErrorBoundary from "./components/ErrorBoundary";
-import ErrorButton from "./components/ErrorButton";
-import { Person } from "./interfaces/interfaces";
-
-type AppProps = {};
+import React, { Component } from 'react';
+import SearchBar from './components/SearchBar';
+import Results from './components/Results';
+import AppWrapper from './components/AppWrapper';
+import ErrorBoundary from './components/ErrorBoundary';
+import ErrorButton from './components/ErrorButton';
+import { Person } from './interfaces/interfaces';
 
 export enum AppStatus {
-  active = "active",
-  loading = "loading",
-  error = "error",
+  active = 'active',
+  loading = 'loading',
+  error = 'error',
 }
 
 type AppState = {
@@ -20,10 +18,10 @@ type AppState = {
   status: AppStatus;
 };
 
-export class App extends Component<AppProps, AppState> {
+export class App extends Component<Record<string, never>, AppState> {
   private abortController: AbortController;
 
-  constructor(props: AppProps) {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = {
       searchTerm: this.getInitialSearchTerm(),
@@ -62,8 +60,8 @@ export class App extends Component<AppProps, AppState> {
         this.setState({ status: AppStatus.active });
       })
       .catch((err) => {
-        if (err.name === "AbortError") {
-          console.log("Request was aborted.");
+        if (err.name === 'AbortError') {
+          console.log('Request was aborted.');
         } else {
           console.error(err);
           this.setState({ status: AppStatus.error });
@@ -72,14 +70,14 @@ export class App extends Component<AppProps, AppState> {
   }
 
   getInitialSearchTerm() {
-    const searchTerm = window.localStorage.getItem("searchTerm");
-    return searchTerm ? searchTerm : "";
+    const searchTerm = window.localStorage.getItem('searchTerm');
+    return searchTerm ? searchTerm : '';
   }
 
   handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
     const searchTerm = e.target.value;
     this.setState({ searchTerm });
-    window.localStorage.setItem("searchTerm", searchTerm);
+    window.localStorage.setItem('searchTerm', searchTerm);
   }
 
   handleSearch() {

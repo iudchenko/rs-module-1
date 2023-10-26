@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-interface ErrorButtonProps {}
 interface ErrorButtonState {
-  error: Boolean;
+  error: boolean;
 }
 
-class ErrorButton extends Component<ErrorButtonProps, ErrorButtonState> {
-  constructor(props: ErrorButtonProps) {
+class ErrorButton extends Component<Record<string, never>, ErrorButtonState> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = { error: false };
   }
@@ -14,7 +13,7 @@ class ErrorButton extends Component<ErrorButtonProps, ErrorButtonState> {
   handleClick = () => {
     try {
       // Simulate an error
-      throw new Error("An error occurred");
+      throw new Error('An error occurred');
     } catch (error) {
       this.setState({ error: true });
     }
@@ -23,7 +22,7 @@ class ErrorButton extends Component<ErrorButtonProps, ErrorButtonState> {
   render() {
     if (this.state.error) {
       // This will trigger the error boundary
-      throw new Error("An error occurred in the render method.");
+      throw new Error('An error occurred in the render method.');
     }
 
     return (

@@ -13,7 +13,7 @@ export class Character extends Component<CharacterProps> {
         <div>
           <h2 className="text-xl font-bold">{name}</h2>
         </div>
-        <div className="flex gap-2 text-white/80">
+        <div className="flex gap-3 text-white/80">
           <p>
             <strong>Gender:</strong> {gender}
           </p>

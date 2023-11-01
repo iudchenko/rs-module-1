@@ -1,4 +1,10 @@
-export interface Person {
+export enum AppStatus {
+  active = 'active',
+  loading = 'loading',
+  error = 'error',
+}
+
+export interface ICharacter {
   birth_year: string;
   eye_color: string;
   films: string[];

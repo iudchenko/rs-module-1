@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Spinner from './Spinner';
 import Character from './Character';
-import { Person } from '../interfaces/interfaces';
+import { ICharacter } from '../types/types';
 
 interface ResultsProps {
   status: string;
-  results: Person[];
+  results: ICharacter[];
 }
 
 export class Results extends Component<ResultsProps> {

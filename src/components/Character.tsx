@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Person } from '../interfaces/interfaces';
+import { ICharacter } from '../types/types';
 
 type CharacterProps = {
-  character: Person;
+  character: ICharacter;
 };
 
 export class Character extends Component<CharacterProps> {

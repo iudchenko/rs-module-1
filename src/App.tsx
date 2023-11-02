@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchBar from './components/SearchBar';
 import Results from './components/Results';
@@ -16,10 +16,19 @@ const App: React.FC<Record<string, never>> = () => {
   const [status, setStatus] = useState<AppStatus>(AppStatus.active);
 
   const getCharacters = async (searchedCharacter: string) => {
-    setStatus(AppStatus.loading);
-    const results = await fetchData(searchedCharacter);
-    setResults(results);
-    setStatus(AppStatus.active);
+    try {
+      setStatus(AppStatus.loading);
+      const results = await fetchData(searchedCharacter);
+      setResults(results);
+      setStatus(AppStatus.active);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.error('An unknown error occurred:', err);
+      }
+      setStatus(AppStatus.error);
+    }
   };
 
   // Initial results
@@ -28,13 +37,10 @@ const App: React.FC<Record<string, never>> = () => {
   }, []);
 
   // Search results
-  const handleSearch = () => {
+  const handleSearch = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     getCharacters(searchTerm);
   };
-
-  // const handleStatus = (newStatus: AppStatus) => {
-  //   setStatus(newStatus);
-  // };
 
   const handleSearchTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
@@ -48,10 +54,10 @@ const App: React.FC<Record<string, never>> = () => {
         <SearchBar
           searchTerm={searchTerm}
           status={status}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
             handleSearchTermChange(e)
           }
-          onSearch={() => handleSearch()}
+          onSearch={(e: React.SyntheticEvent) => handleSearch(e)}
         />
         <Results status={status} results={results} />
         <ErrorButton />

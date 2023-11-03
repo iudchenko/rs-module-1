@@ -14,7 +14,7 @@ function Pagination({ status, currentPage, totalPages }: PaginationProps) {
   return (
     status !== AppStatus.loading &&
     totalPages > 1 && (
-      <div className="text-white flex justify-center gap-5">
+      <div className="text-white flex justify-center gap-3">
         {pages.map((page) => {
           return (
             <Link

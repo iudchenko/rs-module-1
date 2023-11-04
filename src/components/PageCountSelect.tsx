@@ -1,4 +1,9 @@
 import { useState } from 'react';
+import {
+  ITEMS_PER_PAGE_LARGE,
+  ITEMS_PER_PAGE_MEDIUM,
+  ITEMS_PER_PAGE_SMALL,
+} from '../utils/constants';
 
 function PageCountSelect({ perPage, onSelect }) {
   return (
@@ -15,9 +20,9 @@ function PageCountSelect({ perPage, onSelect }) {
         value={perPage}
         onChange={onSelect}
       >
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
+        <option value={ITEMS_PER_PAGE_SMALL}>{ITEMS_PER_PAGE_SMALL}</option>
+        <option value={ITEMS_PER_PAGE_MEDIUM}>{ITEMS_PER_PAGE_MEDIUM}</option>
+        <option value={ITEMS_PER_PAGE_LARGE}>{ITEMS_PER_PAGE_LARGE}</option>
       </select>
     </div>
   );

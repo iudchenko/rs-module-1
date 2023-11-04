@@ -25,8 +25,8 @@ export async function fetchCharacters(
   let url_2;
 
   if (perPage === ITEMS_PER_PAGE_SMALL) {
-    const pageFor5 = Math.ceil(page / 2);
-    url = formatURL(searchTerm, pageFor5);
+    const pageForSmall = Math.ceil(page / 2);
+    url = formatURL(searchTerm, pageForSmall);
   }
 
   if (perPage === ITEMS_PER_PAGE_LARGE) {

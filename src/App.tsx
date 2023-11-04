@@ -10,6 +10,7 @@ import { fetchCharacters } from './utils/fetchData';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import Search from './components/Search';
 import PageCountSelect from './components/PageCountSelect';
+import { ITEMS_PER_PAGE_MEDIUM } from './utils/constants';
 
 const App: React.FC<Record<string, never>> = () => {
   const [searchTerm, setSearchTerm] = useState<string>(
@@ -19,7 +20,7 @@ const App: React.FC<Record<string, never>> = () => {
 
   const [results, setResults] = useState<ICharacter[]>([]);
   const [totalPages, setTotalPages] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(ITEMS_PER_PAGE_MEDIUM);
 
   const [searchParams] = useSearchParams();
 

@@ -36,11 +36,11 @@ function Search({ searchTerm, status, onSearchChange }: ISearchProps) {
   };
 
   return (
-    <header>
-      <form className="max-w-xl mx-auto" onSubmit={handleSearch}>
+    <div className="grow">
+      <form className="" onSubmit={handleSearch}>
         <SearchBar searchTerm={searchTerm} status={status} />
       </form>
-    </header>
+    </div>
   );
 }
 

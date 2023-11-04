@@ -81,11 +81,14 @@ const App: React.FC<Record<string, never>> = () => {
   return (
     <ErrorBoundary>
       <AppWrapper>
-        <Search
-          searchTerm={searchTerm}
-          status={status}
-          onSearchChange={handleSearchTerm}
-        />
+        <header className="flex w-full items-end max-w-xl mx-auto gap-5">
+          <Search
+            searchTerm={searchTerm}
+            status={status}
+            onSearchChange={handleSearchTerm}
+          />
+          <PageCountSelect perPage={perPage} onSelect={handlePerPageSelect} />
+        </header>
         <Results status={status} results={results} />
         <Pagination
           status={status}
@@ -93,7 +96,7 @@ const App: React.FC<Record<string, never>> = () => {
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
-        <PageCountSelect perPage={perPage} onSelect={handlePerPageSelect} />
+
         <ErrorButton />
         <Outlet />
       </AppWrapper>

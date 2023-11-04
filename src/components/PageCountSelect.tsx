@@ -1,11 +1,15 @@
-import { useState } from 'react';
 import {
   ITEMS_PER_PAGE_LARGE,
   ITEMS_PER_PAGE_MEDIUM,
   ITEMS_PER_PAGE_SMALL,
 } from '../utils/constants';
 
-function PageCountSelect({ perPage, onSelect }) {
+type PageCountSelectProps = {
+  perPage: number;
+  onSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+function PageCountSelect({ perPage, onSelect }: PageCountSelectProps) {
   return (
     <div className="w-28 h-20">
       <label

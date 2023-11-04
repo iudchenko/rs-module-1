@@ -33,7 +33,7 @@ function DetailsModal({ children }: DetailsModalProps) {
   }, [handleClose]);
 
   return (
-    <div id="modal" className="py-20 px-5">
+    <div id="modal">
       <div
         className="fixed top-0 left-0 w-full h-full bg-gray-900/30"
         onClick={handleClose}

@@ -9,28 +9,41 @@ import { ICharacter, AppStatus } from './types/types';
 import { fetchCharacters } from './utils/fetchData';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import Search from './components/Search';
+import PageCountSelect from './components/PageCountSelect';
 
 const App: React.FC<Record<string, never>> = () => {
   const [searchTerm, setSearchTerm] = useState<string>(
     window.localStorage.getItem('searchTerm') ?? ''
   );
-  const [results, setResults] = useState<ICharacter[]>([]);
   const [status, setStatus] = useState<AppStatus>(AppStatus.active);
+
+  const [results, setResults] = useState<ICharacter[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   const [searchParams] = useSearchParams();
 
-  const [totalPages, setTotalPages] = useState(1);
-
+  const [currentPage, setCurrentPage] = useState(
+    searchParams.get('page') ? Number(searchParams.get('page')) : 1
+  );
   const navigate = useNavigate();
 
-  const currentPage = searchParams.get('page')
-    ? Number(searchParams.get('page'))
-    : 1;
+  // const currentPage = searchParams.get('page')
+  //   ? Number(searchParams.get('page'))
+  //   : 1;
 
-  const getCharacters = async (searchedCharacter: string, page: number = 1) => {
+  const getCharacters = async (
+    searchedCharacter: string,
+    page: number = 1,
+    perPage: number
+  ) => {
     try {
       setStatus(AppStatus.loading);
-      const { results, pages } = await fetchCharacters(searchedCharacter, page);
+      const { results, pages } = await fetchCharacters(
+        searchedCharacter,
+        page,
+        perPage
+      );
       setResults(results);
       setTotalPages(pages);
       setStatus(AppStatus.active);
@@ -45,11 +58,23 @@ const App: React.FC<Record<string, never>> = () => {
   };
 
   useEffect(() => {
-    getCharacters(searchTerm, currentPage);
-  }, [searchTerm, currentPage]);
+    getCharacters(searchTerm, currentPage, perPage);
+  }, [searchTerm, currentPage, perPage]);
 
   const handleSearchTerm = (searchTerm: string) => {
+    setCurrentPage(1);
     setSearchTerm(searchTerm);
+    navigate(`/`);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePerPageSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPerPage(Number(e.target.value));
+    setCurrentPage(1);
+    navigate(`/`);
   };
 
   return (
@@ -65,7 +90,9 @@ const App: React.FC<Record<string, never>> = () => {
           status={status}
           currentPage={currentPage}
           totalPages={totalPages}
+          onPageChange={handlePageChange}
         />
+        <PageCountSelect perPage={perPage} onSelect={handlePerPageSelect} />
         <ErrorButton />
         <Outlet />
       </AppWrapper>

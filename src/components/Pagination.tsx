@@ -6,21 +6,28 @@ type PaginationProps = {
   status: AppStatus;
   currentPage: number;
   totalPages: number;
+  onPageChange: (page: number) => void;
 };
 
-function Pagination({ status, currentPage, totalPages }: PaginationProps) {
+function Pagination({
+  status,
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   const pages = range(1, totalPages);
 
   return (
     status !== AppStatus.loading &&
     totalPages > 1 && (
-      <div className="text-white flex justify-center gap-3">
+      <div className="text-white max-w-xl mx-auto flex flex-wrap justify-center gap-3">
         {pages.map((page) => {
           return (
             <Link
               key={page}
               to={`/?page=${page}`}
-              className={`w-10 h-10 flex items-center justify-center transition   rounded ${
+              onClick={() => onPageChange(page)}
+              className={`w-8 h-8 text-sm flex items-center justify-center transition   rounded ${
                 currentPage === page
                   ? 'bg-white text-gray-500'
                   : 'bg-gray-500/50 hover:bg-gray-500/70'

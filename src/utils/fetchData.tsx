@@ -87,7 +87,6 @@ export async function fetchCharacters(
     }
 
     // Send data
-
     let results = data.results;
 
     if (perPage === ITEMS_PER_PAGE_SMALL) {

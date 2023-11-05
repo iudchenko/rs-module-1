@@ -33,7 +33,7 @@ function DetailsModal({ children }: DetailsModalProps) {
   }, [handleClose]);
 
   return (
-    <div id="modal" className="fixed top-0 left-0">
+    <div id="modal" className="fixed top-0 left-0 w-full h-full">
       <div className="w-full h-full bg-gray-900/30" onClick={handleClose}></div>
       <div className="z-20 py-20 fixed top-0 right-0 h-full w-96 bg-gray-900/50 backdrop-blur-sm">
         <DetailsClose onClose={handleClose} />

@@ -17,7 +17,7 @@ function Character({ id, character }: CharacterProps) {
   searchParams.set('details', '1');
 
   const handleClick = () => {
-    navigate(`/${id}?${searchParams.toString()}`);
+    navigate(`/search/${id}?${searchParams.toString()}`);
   };
 
   return (

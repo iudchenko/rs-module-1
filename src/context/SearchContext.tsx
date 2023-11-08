@@ -1,9 +1,22 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { ICharacter } from '../types/types';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react';
+import { ICharacter, ISearchContext } from '../types/types';
 
-const SearchContext = createContext(null);
+// const SearchContext = createContext(null);
+// Initialize the context with a default object
+const SearchContext = createContext<ISearchContext>({
+  searchTerm: '',
+  setSearchTerm: () => {},
+  results: [],
+  setResults: () => {},
+});
 
-function SearchProvider({ children }) {
+function SearchProvider({ children }: { children: ReactNode }) {
   const [searchTerm, setSearchTerm] = useState<string>(
     window.localStorage.getItem('searchTerm') ?? ''
   );

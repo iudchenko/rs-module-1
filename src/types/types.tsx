@@ -22,3 +22,17 @@ export interface ICharacter {
   url: string;
   vehicles: string[];
 }
+
+// export interface ISearch {
+//   searchTerm: string;
+//   setSearchTerm: (searchTerm: string) => void;
+//   results: ICharacter[];
+//   setResults: (results: ICharacter[]) => void;
+// }
+
+export interface ISearchContext {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  results: ICharacter[];
+  setResults: React.Dispatch<React.SetStateAction<ICharacter[]>>;
+}

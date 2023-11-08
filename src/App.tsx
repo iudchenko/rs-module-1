@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Results from './components/Results';
 import AppWrapper from './components/AppWrapper';
@@ -28,38 +28,33 @@ const App: React.FC<Record<string, never>> = () => {
   );
   const navigate = useNavigate();
 
-  // const currentPage = searchParams.get('page')
-  //   ? Number(searchParams.get('page'))
-  //   : 1;
-
-  const getCharacters = async (
-    searchedCharacter: string,
-    page: number = 1,
-    perPage: number
-  ) => {
-    try {
-      setStatus(AppStatus.loading);
-      const { results, pages } = await fetchCharacters(
-        searchedCharacter,
-        page,
-        perPage
-      );
-      setResults(results);
-      setTotalPages(pages);
-      setStatus(AppStatus.active);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-      } else {
-        console.error('An unknown error occurred:', err);
+  const getCharacters = useCallback(
+    async (searchedCharacter: string, page: number = 1, perPage: number) => {
+      try {
+        setStatus(AppStatus.loading);
+        const { results, pages } = await fetchCharacters(
+          searchedCharacter,
+          page,
+          perPage
+        );
+        setResults(results);
+        setTotalPages(pages);
+        setStatus(AppStatus.active);
+      } catch (err) {
+        if (err instanceof Error) {
+          console.log(err.message);
+        } else {
+          console.error('An unknown error occurred:', err);
+        }
+        setStatus(AppStatus.error);
       }
-      setStatus(AppStatus.error);
-    }
-  };
+    },
+    [setResults]
+  );
 
   useEffect(() => {
     getCharacters(searchTerm, currentPage, perPage);
-  }, [searchTerm, currentPage, perPage]);
+  }, [searchTerm, currentPage, perPage, getCharacters]);
 
   const handleSearchTerm = (searchTerm: string) => {
     setCurrentPage(1);

@@ -5,20 +5,19 @@ import AppWrapper from './components/AppWrapper';
 import ErrorBoundary from './components/ErrorBoundary';
 import ErrorButton from './components/ErrorButton';
 import Pagination from './components/Pagination';
-import { ICharacter, AppStatus } from './types/types';
+import { AppStatus } from './types/types';
 import { fetchCharacters } from './utils/fetchData';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import Search from './components/Search';
 import PageCountSelect from './components/PageCountSelect';
 import { ITEMS_PER_PAGE_MEDIUM } from './utils/constants';
+import { useSearch } from './context/SearchContext';
 
 const App: React.FC<Record<string, never>> = () => {
-  const [searchTerm, setSearchTerm] = useState<string>(
-    window.localStorage.getItem('searchTerm') ?? ''
-  );
+  const { searchTerm, setSearchTerm, results, setResults } = useSearch();
+
   const [status, setStatus] = useState<AppStatus>(AppStatus.active);
 
-  const [results, setResults] = useState<ICharacter[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [perPage, setPerPage] = useState(ITEMS_PER_PAGE_MEDIUM);
 

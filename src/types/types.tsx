@@ -23,12 +23,12 @@ export interface ICharacter {
   vehicles: string[];
 }
 
-// export interface ISearch {
-//   searchTerm: string;
-//   setSearchTerm: (searchTerm: string) => void;
-//   results: ICharacter[];
-//   setResults: (results: ICharacter[]) => void;
-// }
+export interface ICharacterResponse {
+  count: number;
+  next: null | string;
+  previous: null | string;
+  results: ICharacter[];
+}
 
 export interface ISearchContext {
   searchTerm: string;

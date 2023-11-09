@@ -20,14 +20,18 @@ function Pagination({
   return (
     status !== AppStatus.loading &&
     totalPages > 1 && (
-      <div className="text-white max-w-xl mx-auto flex flex-wrap justify-center gap-3">
+      <div
+        data-testid="pagination"
+        className="text-white max-w-xl mx-auto flex flex-wrap justify-center gap-3"
+      >
         {pages.map((page) => {
           return (
             <Link
               key={page}
+              data-testid={`page-${page}`}
               to={`/?page=${page}`}
               onClick={() => onPageChange(page)}
-              className={`w-8 h-8 text-sm flex items-center justify-center transition   rounded ${
+              className={`w-8 h-8 text-sm flex items-center justify-center transition rounded ${
                 currentPage === page
                   ? 'bg-white text-gray-500'
                   : 'bg-gray-500/50 hover:bg-gray-500/70'

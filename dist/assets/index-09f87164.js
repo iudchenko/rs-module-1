@@ -12117,6 +12117,7 @@ function Dd() {
   return R.jsxs('div', {
     role: 'status',
     className: 'mx-auto',
+    'data-testid': 'spinner',
     children: [
       R.jsxs('svg', {
         'aria-hidden': 'true',
@@ -12141,25 +12142,30 @@ function Dd() {
   });
 }
 function e0({ id: e, character: t }) {
-  const { name: n, gender: r, height: l, mass: o, birth_year: i } = t,
-    a = sr(),
-    u = ur(),
-    s = new URLSearchParams(u.search);
-  s.set('details', '1');
-  const p = () => {
-    a(`/search/${e}?${s.toString()}`);
+  const { name: n, birth_year: r } = t,
+    l = sr(),
+    o = ur(),
+    i = new URLSearchParams(o.search);
+  i.set('details', '1');
+  const a = () => {
+    l(`/search/${e}?${i.toString()}`);
   };
   return R.jsx('li', {
     className:
       'flex items-center grow w-full gap-5 bg-gray-900/50 text-white rounded-lg',
     children: R.jsxs('div', {
-      onClick: p,
+      'data-testid': 'character-li',
+      onClick: a,
       className:
         'flex grow items-center justify-between gap-5 text-white px-5 py-2 cursor-pointer',
       children: [
         R.jsx('h2', { className: 'text-xl font-bold', children: n }),
         R.jsxs('p', {
-          children: [R.jsx('strong', { children: 'Birth Year:' }), ' ', i],
+          children: [
+            R.jsx('strong', { children: 'Birth Year:' }),
+            ' ',
+            r.toUpperCase(),
+          ],
         }),
       ],
     }),
@@ -12382,6 +12388,7 @@ function s0({ searchTerm: e, status: t }) {
           }),
           R.jsx('button', {
             type: 'submit',
+            'data-testid': 'submit-btn',
             className:
               'text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800',
             disabled: t === $e.loading,
@@ -12412,6 +12419,7 @@ function c0({ searchTerm: e, status: t, onSearchChange: n }) {
     children: R.jsx('form', {
       className: '',
       onSubmit: o,
+      role: 'search',
       children: R.jsx(s0, { searchTerm: e, status: t }),
     }),
   });
@@ -12427,6 +12435,7 @@ function f0({ perPage: e, onSelect: t }) {
       }),
       R.jsxs('select', {
         id: 'per_page',
+        'data-testid': 'per_page',
         className:
           'w-full h-12 bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700/50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 backdrop-blur-lg',
         value: e,
@@ -12561,6 +12570,7 @@ function nc({ children: e }) {
     }, [r]),
     R.jsxs('div', {
       id: 'modal',
+      'data-testid': 'modal',
       className: 'fixed top-0 left-0 w-full h-full',
       children: [
         R.jsx('div', { className: 'w-full h-full bg-gray-900/30', onClick: r }),
@@ -12576,7 +12586,7 @@ function nc({ children: e }) {
 const Ln = (e) =>
   e
     .split(' ')
-    .map((t) => t.charAt(0).toUpperCase() + t.slice(1))
+    .map((t) => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase())
     .join(' ');
 function v0({ details: e }) {
   const {
@@ -12605,7 +12615,7 @@ function v0({ details: e }) {
           className: 'flex justify-between',
           children: [
             R.jsx('span', { className: 'font-bold', children: 'Birth Year: ' }),
-            Ln(n),
+            Ln(n.toUpperCase()),
           ],
         }),
         R.jsxs('li', {

@@ -104,7 +104,7 @@ export async function fetchCharacters(
   }
 }
 
-function formatURL(searchTerm: string, page: number) {
+export function formatURL(searchTerm: string, page: number) {
   return `${API_URL}${
     searchTerm ? `?search=${searchTerm.toLowerCase().trim()}` : ''
   }${page === 1 ? '' : `${searchTerm ? `&` : `?`}page=${page}`}`;

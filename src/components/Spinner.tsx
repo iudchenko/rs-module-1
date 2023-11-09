@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div role="status" className="mx-auto">
+    <div role="status" className="mx-auto" data-testid="spinner">
       <svg
         aria-hidden="true"
         className="w-8 h-8 mx-auto text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

@@ -25,7 +25,7 @@ function DetailsCharacter({ details }: DetailsCharacterProps) {
         </li>
         <li className="flex justify-between">
           <span className="font-bold">Birth Year: </span>
-          {makeSentenceCase(birth_year)}
+          {makeSentenceCase(birth_year.toUpperCase())}
         </li>
         <li className="flex justify-between">
           <span className="font-bold">Height: </span>

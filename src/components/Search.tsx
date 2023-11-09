@@ -37,7 +37,7 @@ function Search({ searchTerm, status, onSearchChange }: ISearchProps) {
 
   return (
     <div className="grow">
-      <form className="" onSubmit={handleSearch}>
+      <form className="" onSubmit={handleSearch} role="search">
         <SearchBar searchTerm={searchTerm} status={status} />
       </form>
     </div>

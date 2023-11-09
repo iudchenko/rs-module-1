@@ -93,7 +93,6 @@ describe('App with no results', () => {
       })
     ) as Mock;
   });
-
   // Render the app
   beforeEach(() => {
     render(<MockApp />);

@@ -51,7 +51,6 @@ describe('Detailed Card', () => {
     act(() => {
       fireEvent.click(cards[0]);
     });
-    // console.log(cards[0]);
     // });
 
     // await waitFor(() => {

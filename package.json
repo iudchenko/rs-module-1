@@ -57,8 +57,10 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
-      "prettier --write",
-      "vitest --coverage"
+      "prettier --write"
+    ],
+    "src/**/__tests__/*.{ts,tsx}": [
+      "vitest --coverage --coverageDirectory=coverage"
     ]
   },
   "jest": {

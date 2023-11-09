@@ -59,5 +59,6 @@ describe('Detailed Card', () => {
 
     // screen.debug();
     // screen.debug();
+    // screen.debug();
   });
 });

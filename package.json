@@ -58,9 +58,6 @@
     "./src/**/*.{ts,tsx,js,jsx}": [
       "eslint --fix",
       "prettier --write"
-    ],
-    "./src/**/*/__tests__/*.{ts,tsx}": [
-      "vitest --coverage"
     ]
   },
   "jest": {

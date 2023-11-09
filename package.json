@@ -11,8 +11,7 @@
     "format:fix": "npx prettier --write .",
     "prepare": "husky install",
     "test": "vitest --coverage",
-    "test:watch": "vitest",
-    "precommit": "npm run lint && npm test"
+    "test:watch": "vitest"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -52,14 +51,14 @@
   },
   "husky": {
     "hooks": {
-      // "pre-commit": "lint-staged"
-      "pre-commit": "npm run precommit"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "vitest --coverage"
     ]
   },
   "jest": {

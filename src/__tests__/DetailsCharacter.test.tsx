@@ -44,14 +44,12 @@ describe('Detailed Card', () => {
       expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
     });
 
-    // await waitFor(() => {
     const cards = screen.getAllByTestId('character-li');
     const cardCount = cards.length;
     expect(cardCount).toBe(10);
     act(() => {
       fireEvent.click(cards[0]);
     });
-    // });
 
     // await waitFor(() => {
     //   const modal = screen.getByTestId('modal');

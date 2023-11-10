@@ -1,16 +1,9 @@
-import {
-  waitFor,
-  render,
-  screen,
-  fireEvent,
-  act,
-} from '@testing-library/react';
-import { Mock, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { waitFor, render, screen, fireEvent } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
-import { MOCK_CHARACTER, MOCK_CHARACTERS_10 } from './mockData';
+import { MOCK_CHARACTER } from './mockData';
 
-import App from '../App';
 import DetailsCharacter from '../components/DetailsCharacter';
 import DetailsModal from '../components/DetailsModal';
 import Spinner from '../components/Spinner';
@@ -50,7 +43,7 @@ const MockDetailsClose = ({ handleClose }: { handleClose: () => void }) => {
   );
 };
 
-describe('Detailed Card', () => {
+describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
     render(<MockDetailedCardLoading />);
 
@@ -86,4 +79,8 @@ describe('Detailed Card', () => {
   });
 
   screen.debug();
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 });

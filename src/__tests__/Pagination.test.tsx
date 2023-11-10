@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import {
   Mock,
-  afterAll,
+  afterEach,
   beforeAll,
   beforeEach,
   describe,
@@ -18,9 +18,8 @@ import {
 
 import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
-import App from '../App';
 import { MOCK_CHARACTERS_10 } from './mockData';
-import { a } from 'vitest/dist/reporters-5f784f42';
+import AppRoutes from '../components/AppRoutes';
 
 const mockedNavigator = vi.fn();
 
@@ -28,13 +27,13 @@ const MockApp = () => {
   return (
     <SearchProvider>
       <MemoryRouter>
-        <App />
+        <AppRoutes />
       </MemoryRouter>
     </SearchProvider>
   );
 };
 
-describe('Pagination', () => {
+describe('Tests for the Pagination component', () => {
   beforeAll(() => {
     global.fetch = vi.fn(() =>
       Promise.resolve({
@@ -76,5 +75,9 @@ describe('Pagination', () => {
     });
 
     screen.debug();
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 });

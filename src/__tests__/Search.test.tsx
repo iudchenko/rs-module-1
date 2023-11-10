@@ -1,22 +1,31 @@
 import { waitFor, render, screen, fireEvent } from '@testing-library/react';
-import { Mock, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  Mock,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTERS_10 } from './mockData';
 
-import App from '../App';
+import AppRoutes from '../components/AppRoutes';
 
 const MockApp = () => {
   return (
     <SearchProvider>
       <MemoryRouter>
-        <App />
+        <AppRoutes />
       </MemoryRouter>
     </SearchProvider>
   );
 };
 
-describe('Character', () => {
+describe('Tests for the Search component', () => {
   beforeAll(() => {
     global.fetch = vi.fn(() =>
       Promise.resolve({
@@ -53,5 +62,9 @@ describe('Character', () => {
     });
     const ls = localStorage.store.searchTerm;
     expect(ls).toBe('yoda');
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 });

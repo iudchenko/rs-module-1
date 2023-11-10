@@ -10,10 +10,8 @@ function Details() {
   const [details, setDetails] = useState<ICharacter | null>(null);
   const [detailsStatus, setDetailsStatus] = useState(AppStatus.active);
   const { id } = useParams();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const detailsOpened = Number(searchParams.get('details')) === 1 ? 1 : 0;
-
-  // console.log(Number(id), detailsOpened);
 
   useEffect(() => {
     const getCharacter = async () => {

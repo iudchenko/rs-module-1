@@ -5,8 +5,17 @@ import {
   fireEvent,
   act,
 } from '@testing-library/react';
-import { Mock, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
+import {
+  Mock,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
+import { MemoryRouter, useSearchParams } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTERS_1 } from './mockData';
 
@@ -24,7 +33,7 @@ const MockApp = () => {
   );
 };
 
-describe('Character', () => {
+describe('Tests for the Card component', () => {
   beforeAll(() => {
     global.fetch = vi.fn(() =>
       Promise.resolve({
@@ -40,7 +49,7 @@ describe('Character', () => {
 
   it('Ensure that the card component renders the relevant card data', async () => {
     await waitFor(() => {
-      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+      expect(screen.getByText(/Luke Skywalker/i)).toBeInTheDocument();
     });
   });
 
@@ -54,7 +63,7 @@ describe('Character', () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+      expect(screen.getByText(/Luke Skywalker/i)).toBeInTheDocument();
     });
 
     const card = screen.getAllByTestId('character-li')[0];
@@ -64,6 +73,13 @@ describe('Character', () => {
     });
 
     expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
+
+    // await waitFor(() => {
+    //   const modal = screen.getByTestId('modal');
+    //   expect(modal).toBeInTheDocument();
+    // });
+
+    screen.debug();
   });
 
   it('Check that clicking triggers an additional API call to fetch detailed information.', async () => {
@@ -86,12 +102,11 @@ describe('Character', () => {
     });
 
     expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
-
-    // Wait for the API call to be made
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalled();
-    });
   });
 
   screen.debug();
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 });

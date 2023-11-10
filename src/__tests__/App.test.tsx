@@ -22,7 +22,7 @@ const MockApp = () => {
   );
 };
 
-describe('App with results', () => {
+describe('Tests for the Card List component', () => {
   beforeAll(() => {
     global.fetch = vi.fn(() =>
       Promise.resolve({
@@ -85,7 +85,7 @@ describe('App with results', () => {
   });
 });
 
-describe('App with no results', () => {
+describe('Tests for the Card List component (no results)', () => {
   beforeAll(() => {
     global.fetch = vi.fn(() =>
       Promise.resolve({
@@ -100,7 +100,7 @@ describe('App with no results', () => {
 
   it('Check that an appropriate message is displayed if no cards are present.', async () => {
     await waitFor(() => {
-      const nothingFound = screen.getByText('Nothing found');
+      const nothingFound = screen.getByText(/Nothing found/i);
 
       expect(nothingFound).toBeInTheDocument();
     });

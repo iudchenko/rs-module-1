@@ -78,6 +78,8 @@ describe('Character', () => {
   //   console.log(searchParams.get('details'));
 
   //   screen.debug();
+  //   screen.debug();
+
   // });
 
   // it('Check that clicking triggers an additional API call to fetch detailed information', async () => {

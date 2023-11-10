@@ -78,6 +78,7 @@ describe('Character', () => {
   //   console.log(searchParams.get('details'));
 
   //   screen.debug();
+  //   screen.debug();
 
   // });
 

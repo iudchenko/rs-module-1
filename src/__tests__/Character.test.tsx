@@ -79,6 +79,7 @@ describe('Character', () => {
 
   //   screen.debug();
   //   screen.debug();
+  //   screen.debug();
 
   // });
 

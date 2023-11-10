@@ -83,6 +83,7 @@ describe('Character', () => {
   //   screen.debug();
   //   screen.debug();
   // console.log("testing pre-push")
+  // console.log("testing pre-push")
 
   // });
 

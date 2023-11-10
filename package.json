@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format:fix": "npx prettier --write .",
     "prepare": "husky install",
-    "test": "vitest --coverage",
+    "test": "vitest run",
+    "test:coverage": "vitest --coverage",
     "test:watch": "vitest"
   },
   "dependencies": {

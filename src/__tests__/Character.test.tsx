@@ -78,17 +78,6 @@ describe('Character', () => {
   //   console.log(searchParams.get('details'));
 
   //   screen.debug();
-  //   screen.debug();
-  //   screen.debug();
-  //   screen.debug();
-  //   screen.debug();
-  // console.log("testing pre-push")
-  // console.log("testing pre-push")
-  // console.log("testing pre-push")
-  // console.log("testing pre-push final")
-  // console.log("testing pre-push final")
-  // console.log("testing pre-push final")
-  // console.log("testing pre-push final")
 
   // });
 

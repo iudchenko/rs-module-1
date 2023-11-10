@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router';
 import { ICharacter } from '../types/types';
 
 type CharacterProps = {

@@ -1,4 +1,3 @@
-import Character from '../components/Character';
 import {
   waitFor,
   render,
@@ -6,27 +5,14 @@ import {
   fireEvent,
   act,
 } from '@testing-library/react';
-import {
-  Mock,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  test,
-  vi,
-} from 'vitest';
+import { Mock, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
-import { ICharacter } from '../types/types';
-import DetailsCharacter from '../components/DetailsCharacter';
-import DetailsModal from '../components/DetailsModal';
 import { MOCK_CHARACTERS_1 } from './mockData';
-import { useParams, useSearchParams } from 'react-router-dom';
 
 import App from '../App';
-import { mockUseSearchParams } from '../__mocks__/react-router-dom';
+
+const mockedNavigator = vi.fn();
 
 const MockApp = () => {
   return (
@@ -47,12 +33,6 @@ describe('Character', () => {
     ) as Mock;
   });
 
-  // beforeAll(() => {
-  //   vi.spyOn(URLSearchParams.prototype, 'get').mockImplementation(
-  //     (details) => '0'
-  //   );
-  // });
-
   // Render the character
   beforeEach(() => {
     render(<MockApp />);
@@ -64,51 +44,54 @@ describe('Character', () => {
     });
   });
 
-  // it('Validate that clicking on a card opens a detailed card component', async () => {
-  //   // vi.mocked(useSearchParams).mockReturnValue({ details: '0' });
-  //   await waitFor(() => {
-  //     const card = screen.getByTestId('character-li');
-  //     // console.log(card);
+  it('Validate that clicking on a card opens a detailed card component', async () => {
+    vi.mock('react-router-dom', async () => {
+      const actual = await vi.importActual('react-router-dom');
+      return {
+        ...(actual as object),
+        useNavigate: () => mockedNavigator,
+      };
+    });
 
-  //     fireEvent.click(card);
-  //   });
-  //   // Check the updated URL search parameters
-  //   const searchParams = new URLSearchParams(window.location.search);
-  //   expect(searchParams.get('details')).toBe('1');
-  //   console.log(searchParams.get('details'));
+    await waitFor(() => {
+      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+    });
 
-  //   screen.debug();
-  //   screen.debug();
-  //   screen.debug();
-  //   screen.debug();
+    const card = screen.getAllByTestId('character-li')[0];
 
-  // });
+    act(() => {
+      fireEvent.click(card);
+    });
 
-  // it('Check that clicking triggers an additional API call to fetch detailed information', async () => {
-  //   const card = screen.getAllByRole('listitem')[0];
+    expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
+  });
 
-  //   fireEvent.click(card);
+  it('Check that clicking triggers an additional API call to fetch detailed information.', async () => {
+    vi.mock('react-router-dom', async () => {
+      const actual = await vi.importActual('react-router-dom');
+      return {
+        ...(actual as object),
+        useNavigate: () => mockedNavigator,
+      };
+    });
 
-  //   // const modal = screen.getByTestId('modal');
+    await waitFor(() => {
+      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+    });
 
-  //   // expect(modal).toBeInTheDocument();
+    const card = screen.getAllByTestId('character-li')[0];
 
-  //   // Wait for the API call to resolve
-  //   // const luke_height = await screen.findByText('172');
-  //   // const luke_height = await screen.findByText('172');
+    act(() => {
+      fireEvent.click(card);
+    });
 
-  //   // expect(luke_height).toBeInTheDocument();
+    expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
 
-  //   // Assert that the API was called with the expected URL
-  //   await waitFor(() => {
-  //     // Assert that the API was called with the expected URL
-  //     // expect(global.fetch).toHaveBeenCalled();
-  //     expect(global.fetch).toHaveBeenCalledWith(
-  //       'https://swapi.dev/api/people/1'
-  //     );
-  //   });
+    // Wait for the API call to be made
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalled();
+    });
+  });
 
-  //   //  Clean up the mock
-  //   screen.debug();
-  // });
+  screen.debug();
 });

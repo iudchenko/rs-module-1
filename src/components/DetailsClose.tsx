@@ -4,7 +4,11 @@ type DetailsCloseProps = {
 
 function DetailsClose({ onClose }: DetailsCloseProps) {
   return (
-    <button onClick={onClose} className="fixed top-4 right-4">
+    <button
+      data-testid="close-btn"
+      onClick={onClose}
+      className="fixed top-4 right-4"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

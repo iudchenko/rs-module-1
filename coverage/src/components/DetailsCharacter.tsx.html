@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/Search.tsx</title>
+    <title>Code coverage report for src/components/DetailsCharacter.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> Search.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> DetailsCharacter.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>59/59</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>47/47</span>
+                <span class='fraction'>59/59</span>
             </div>
         
             
@@ -110,30 +110,19 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -146,64 +135,111 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
-<span class="cline-any cline-yes">41x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import { AppStatus } from '../types/types';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import SearchBar from './SearchBar';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ICharacter } from '../types/types';
+import { makeSentenceCase } from '../utils/strings';
 &nbsp;
-interface ISearchProps {
-  searchTerm: string;
-  status: AppStatus;
-  onSearchChange: (e: string) =&gt; void;
-}
+type DetailsCharacterProps = {
+  details: ICharacter;
+};
 &nbsp;
-function Search({ searchTerm, status, onSearchChange }: ISearchProps) {
-  const [searchParams] = useSearchParams();
-&nbsp;
-  const navigate = useNavigate();
-&nbsp;
-  // Search results
-  const handleSearch = (e: React.SyntheticEvent) =&gt; {
-    e.preventDefault();
-    const searchTermInput = (e.target as HTMLFormElement).elements.namedItem(
-      'searchTerm'
-    ) as HTMLInputElement;
-    const searchTerm = searchTermInput.value;
-&nbsp;
-    // Reset all search params for new search
-    const updatedSearchParams = new URLSearchParams(searchParams);
-    updatedSearchParams.set('page', '1');
-    updatedSearchParams.set('details', '0');
-    updatedSearchParams.delete('page');
-    updatedSearchParams.delete('details');
-&nbsp;
-    navigate(`/?${updatedSearchParams.toString()}`);
-&nbsp;
-    window.localStorage.setItem('searchTerm', searchTerm);
-    onSearchChange(searchTerm);
-  };
-&nbsp;
+function DetailsCharacter({ details }: DetailsCharacterProps) {
+  const {
+    name,
+    birth_year,
+    height,
+    mass,
+    hair_color,
+    skin_color,
+    eye_color,
+    gender,
+  } = details;
   return (
-    &lt;div className="grow"&gt;
-      &lt;form className="" onSubmit={handleSearch} role="search"&gt;
-        &lt;SearchBar searchTerm={searchTerm} status={status} /&gt;
-      &lt;/form&gt;
+    &lt;div className="text-white py-20 px-5"&gt;
+      &lt;ul className="flex flex-col gap-3"&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Name: &lt;/span&gt;
+          {makeSentenceCase(name)}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Birth Year: &lt;/span&gt;
+          {makeSentenceCase(birth_year.toUpperCase())}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Height: &lt;/span&gt;
+          {height}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Mass: &lt;/span&gt;
+          {mass}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Hair Color: &lt;/span&gt;
+          {makeSentenceCase(hair_color)}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Skin Color: &lt;/span&gt;
+          {makeSentenceCase(skin_color)}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Eye Color: &lt;/span&gt;
+          {makeSentenceCase(eye_color)}
+        &lt;/li&gt;
+        &lt;li className="flex justify-between"&gt;
+          &lt;span className="font-bold"&gt;Gender: &lt;/span&gt;
+          {makeSentenceCase(gender)}
+        &lt;/li&gt;
+      &lt;/ul&gt;
     &lt;/div&gt;
   );
 }
 &nbsp;
-export default Search;
+export default DetailsCharacter;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

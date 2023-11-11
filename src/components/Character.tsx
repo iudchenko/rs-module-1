@@ -11,7 +11,7 @@ function Character({ id, character }: CharacterProps) {
 
   const navigate = useNavigate();
 
-  // Get the current location object
+  // Get the current location object using search params
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   searchParams.set('details', '1');

@@ -8,6 +8,7 @@ import DetailsCharacter from '../components/DetailsCharacter';
 import DetailsModal from '../components/DetailsModal';
 import Spinner from '../components/Spinner';
 import DetailsClose from '../components/DetailsClose';
+import Details from '../components/Details';
 
 const MockDetailedCardLoading = () => {
   return (

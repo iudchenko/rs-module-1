@@ -24,7 +24,7 @@ function Character({ id, character }: CharacterProps) {
     <li className="flex items-center grow w-full gap-5 bg-gray-900/50 text-white rounded-lg">
       <div
         onClick={handleClick}
-        className="flex grow items-center justify-between gap-5 text-white/80 px-5 py-2 cursor-pointer"
+        className="flex grow items-center justify-between gap-5 text-white px-5 py-2 cursor-pointer"
       >
         <h2 className="text-xl font-bold">{name}</h2>
 

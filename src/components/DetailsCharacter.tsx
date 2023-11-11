@@ -17,7 +17,7 @@ function DetailsCharacter({ details }: DetailsCharacterProps) {
     gender,
   } = details;
   return (
-    <div className="text-white py-20 px-5">
+    <div data-testid="details" className="text-white py-20 px-5">
       <ul className="flex flex-col gap-3">
         <li className="flex justify-between">
           <span className="font-bold">Name: </span>

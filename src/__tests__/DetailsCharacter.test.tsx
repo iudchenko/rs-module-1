@@ -1,5 +1,11 @@
-import { waitFor, render, screen, fireEvent } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import {
+  waitFor,
+  render,
+  screen,
+  fireEvent,
+  act,
+} from '@testing-library/react';
+import { Mock, afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTER } from './mockData';
@@ -10,24 +16,11 @@ import Spinner from '../components/Spinner';
 import DetailsClose from '../components/DetailsClose';
 import Details from '../components/Details';
 
-const MockDetailedCardLoading = () => {
-  return (
-    <SearchProvider>
-      <MemoryRouter>
-        <DetailsModal>
-          <Spinner />
-        </DetailsModal>
-      </MemoryRouter>
-    </SearchProvider>
-  );
-};
 const MockDetailedCard = () => {
   return (
     <SearchProvider>
-      <MemoryRouter>
-        <DetailsModal>
-          <DetailsCharacter details={MOCK_CHARACTER} />
-        </DetailsModal>
+      <MemoryRouter initialEntries={['/search/1?details=1']}>
+        <Details />
       </MemoryRouter>
     </SearchProvider>
   );
@@ -45,7 +38,7 @@ const MockDetailsClose = ({ handleClose }: { handleClose: () => void }) => {
 
 describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
-    render(<MockDetailedCardLoading />);
+    render(<MockDetailedCard />);
 
     await waitFor(() => {
       const spinner = screen.getByTestId('spinner');
@@ -55,6 +48,12 @@ describe('Tests for the Detailed Card component', () => {
   });
 
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(MOCK_CHARACTER),
+      })
+    ) as Mock;
+
     render(<MockDetailedCard />);
 
     await waitFor(() => {
@@ -77,12 +76,24 @@ describe('Tests for the Detailed Card component', () => {
       expect(skin_color).toBeInTheDocument();
       expect(hair_color).toBeInTheDocument();
     });
+    screen.debug();
   });
 
-  it('Ensure that clicking the close button hides the component', () => {
+  it('Ensure that clicking the close button hides the component', async () => {
     const mockHandleClose = vi.fn();
     // Render the component
     render(<MockDetailsClose handleClose={mockHandleClose} />);
+    // render(<MockDetailedCard />);
+
+    // await waitFor(() => {
+    //   const modal = screen.getByTestId('modal');
+    //   expect(modal).toBeInTheDocument();
+    // });
+
+    // act(() => {
+    //   const modalClose = screen.getByTestId('close-btn');
+    //   fireEvent.click(modalClose);
+    // });
 
     // Trigger the event (clicking the close button)
     const modalClose = screen.getByTestId('close-btn');

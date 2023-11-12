@@ -10,9 +10,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTER } from './mockData';
 
-import DetailsCharacter from '../components/DetailsCharacter';
-import DetailsModal from '../components/DetailsModal';
-import Spinner from '../components/Spinner';
 import DetailsClose from '../components/DetailsClose';
 import Details from '../components/Details';
 
@@ -26,7 +23,11 @@ const MockDetailedCard = () => {
   );
 };
 
-const MockDetailsClose = ({ handleClose }: { handleClose: () => void }) => {
+const MockDetailsCloseButton = ({
+  handleClose,
+}: {
+  handleClose: () => void;
+}) => {
   return (
     <SearchProvider>
       <MemoryRouter>
@@ -42,7 +43,6 @@ describe('Tests for the Detailed Card component', () => {
 
     await waitFor(() => {
       const spinner = screen.getByTestId('spinner');
-
       expect(spinner).toBeInTheDocument();
     });
   });
@@ -81,24 +81,13 @@ describe('Tests for the Detailed Card component', () => {
 
   it('Ensure that clicking the close button hides the component', async () => {
     const mockHandleClose = vi.fn();
-    // Render the component
-    render(<MockDetailsClose handleClose={mockHandleClose} />);
-    // render(<MockDetailedCard />);
+    render(<MockDetailsCloseButton handleClose={mockHandleClose} />);
 
-    // await waitFor(() => {
-    //   const modal = screen.getByTestId('modal');
-    //   expect(modal).toBeInTheDocument();
-    // });
-
-    // act(() => {
-    //   const modalClose = screen.getByTestId('close-btn');
-    //   fireEvent.click(modalClose);
-    // });
-
-    // Trigger the event (clicking the close button)
     const modalClose = screen.getByTestId('close-btn');
 
-    fireEvent.click(modalClose);
+    act(() => {
+      fireEvent.click(modalClose);
+    });
 
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });

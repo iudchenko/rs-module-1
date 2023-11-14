@@ -34,13 +34,7 @@ const MockApp = () => {
 };
 
 describe('Tests for the Card component', () => {
-  beforeAll(() => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(MOCK_CHARACTERS_1),
-      })
-    ) as Mock;
-  });
+  w;
 
   // Render the character
   beforeEach(() => {

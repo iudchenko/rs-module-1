@@ -17,7 +17,7 @@ import {
 } from 'vitest';
 import { MemoryRouter, useSearchParams } from 'react-router-dom';
 import { SearchProvider } from '../context/SearchContext';
-import { MOCK_CHARACTERS_1 } from './mockData';
+import { MOCK_CHARACTERS_1, MOCK_CHARACTERS_10 } from './mockData';
 
 import App from '../App';
 
@@ -34,11 +34,17 @@ const MockApp = () => {
 };
 
 describe('Tests for the Card component', () => {
-  w;
-
   // Render the character
   beforeEach(() => {
     render(<MockApp />);
+  });
+
+  beforeAll(() => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(MOCK_CHARACTERS_10),
+      })
+    ) as Mock;
   });
 
   it('Ensure that the card component renders the relevant card data', async () => {

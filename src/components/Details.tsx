@@ -1,46 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { fetchCharacter } from '../utils/fetchData';
-import { AppStatus, ICharacter } from '../types/types';
+import { ICharacter } from '../types/types';
 import Spinner from './Spinner';
 import DetailsModal from './DetailsModal';
 import DetailsCharacter from './DetailsCharacter';
+import { useGetCharacterQuery } from '../redux/api/apiSlice';
 
 function Details() {
-  const [details, setDetails] = useState<ICharacter | null>(null);
-  const [detailsStatus, setDetailsStatus] = useState(AppStatus.active);
+  // const [details, setDetails] = useState<ICharacter | null>(null);
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const detailsOpened = Number(searchParams.get('details')) === 1 ? 1 : 0;
 
-  useEffect(() => {
-    const getCharacter = async () => {
-      setDetailsStatus(AppStatus.loading);
-      const { data } = await fetchCharacter(Number(id));
-      if (data) {
-        setDetails(data);
-        // console.log(response.data);
-      }
-      setDetailsStatus(AppStatus.active);
-    };
-    getCharacter();
-  }, [id]);
+  const {
+    data: details,
+    isLoading: isLoadingDetails,
+    isFetching: isFetchingDetails,
+    isSuccess: isSuccessDetails,
+    isError: isErrorDetails,
+    error: errorDetails,
+  } = useGetCharacterQuery(id);
 
   return (
     <>
       {detailsOpened === 1 && (
-        <>
-          {detailsStatus === AppStatus.loading && (
-            <DetailsModal>
-              <Spinner />
-            </DetailsModal>
-          )}
-          {detailsStatus === AppStatus.active && details !== null && (
-            <DetailsModal>
-              <DetailsCharacter details={details} />
-            </DetailsModal>
-          )}
-        </>
+        <DetailsModal>
+          {isFetchingDetails && <Spinner />}
+          {isSuccessDetails &&
+            !(isLoadingDetails || isFetchingDetails) &&
+            details !== null && <DetailsCharacter details={details} />}
+          {isErrorDetails && <p className="text-white">Something went wrong</p>}
+        </DetailsModal>
       )}
     </>
   );

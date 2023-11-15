@@ -1,5 +1,4 @@
 import {
-  ITEMS_PER_PAGE_LARGE,
   ITEMS_PER_PAGE_MEDIUM,
   ITEMS_PER_PAGE_SMALL,
 } from '../utils/constants';
@@ -27,7 +26,6 @@ function PageCountSelect({ perPage, onSelect }: PageCountSelectProps) {
       >
         <option value={ITEMS_PER_PAGE_SMALL}>{ITEMS_PER_PAGE_SMALL}</option>
         <option value={ITEMS_PER_PAGE_MEDIUM}>{ITEMS_PER_PAGE_MEDIUM}</option>
-        <option value={ITEMS_PER_PAGE_LARGE}>{ITEMS_PER_PAGE_LARGE}</option>
       </select>
     </div>
   );

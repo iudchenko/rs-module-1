@@ -5,11 +5,10 @@ import SearchBar from './SearchBar';
 
 interface ISearchProps {
   searchTerm: string;
-  status: AppStatus;
-  onSearchChange: (e: string) => void;
+  onSearch: (e: string) => void;
 }
 
-function Search({ searchTerm, status, onSearchChange }: ISearchProps) {
+function Search({ searchTerm, onSearch }: ISearchProps) {
   const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
@@ -32,13 +31,13 @@ function Search({ searchTerm, status, onSearchChange }: ISearchProps) {
     navigate(`/?${updatedSearchParams.toString()}`);
 
     window.localStorage.setItem('searchTerm', searchTerm);
-    onSearchChange(searchTerm);
+    onSearch(searchTerm);
   };
 
   return (
     <div className="grow">
       <form className="" onSubmit={handleSearch} role="search">
-        <SearchBar searchTerm={searchTerm} status={status} />
+        <SearchBar searchTerm={searchTerm} />
       </form>
     </div>
   );

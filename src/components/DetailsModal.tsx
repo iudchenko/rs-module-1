@@ -1,6 +1,8 @@
 import React, { ReactNode, useCallback, useEffect } from 'react';
 import DetailsClose from './DetailsClose';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { changeViewMode } from '../redux/search/search';
 
 type DetailsModalProps = {
   children: ReactNode;
@@ -8,15 +10,17 @@ type DetailsModalProps = {
 
 function DetailsModal({ children }: DetailsModalProps) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
   const handleClose = useCallback(() => {
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set('details', '0');
     updatedSearchParams.delete('details');
+    dispatch(changeViewMode(false));
 
     navigate(`?${updatedSearchParams.toString()}`);
-  }, [searchParams, navigate]);
+  }, [searchParams, navigate, dispatch]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

@@ -16,7 +16,6 @@ import {
   vi,
 } from 'vitest';
 import { MemoryRouter, useSearchParams } from 'react-router-dom';
-import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTERS_1, MOCK_CHARACTERS_10 } from './mockData';
 
 import App from '../App';
@@ -25,11 +24,9 @@ const mockedNavigator = vi.fn();
 
 const MockApp = () => {
   return (
-    <SearchProvider>
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    </SearchProvider>
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
   );
 };
 

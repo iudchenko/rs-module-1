@@ -10,18 +10,15 @@ import {
   vi,
 } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTERS_10 } from './mockData';
 
 import AppRoutes from '../components/AppRoutes';
 
 const MockApp = () => {
   return (
-    <SearchProvider>
-      <MemoryRouter>
-        <AppRoutes />
-      </MemoryRouter>
-    </SearchProvider>
+    <MemoryRouter>
+      <AppRoutes />
+    </MemoryRouter>
   );
 };
 

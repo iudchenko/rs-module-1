@@ -1,6 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router';
 import { ICharacter } from '../types/types';
+import { changeViewMode } from '../redux/search/search';
+import { useDispatch } from 'react-redux';
 
 type CharacterProps = {
   id: number;
@@ -11,6 +13,7 @@ function Character({ id, character }: CharacterProps) {
   const { name, birth_year } = character;
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Get the current location object
   const location = useLocation();
@@ -18,6 +21,7 @@ function Character({ id, character }: CharacterProps) {
   searchParams.set('details', '1');
 
   const handleClick = () => {
+    dispatch(changeViewMode(true));
     navigate(`/search/${id}?${searchParams.toString()}`);
   };
 

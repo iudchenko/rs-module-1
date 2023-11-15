@@ -3,10 +3,9 @@ import { AppStatus } from '../types/types';
 
 interface ISearchBarProps {
   searchTerm: string;
-  status: AppStatus;
 }
 
-function SearchBar({ searchTerm, status }: ISearchBarProps) {
+function SearchBar({ searchTerm }: ISearchBarProps) {
   return (
     <>
       <label

@@ -30,9 +30,9 @@ export interface ICharacterResponse {
   results: ICharacter[];
 }
 
-export interface ISearchContext {
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  results: ICharacter[];
-  setResults: React.Dispatch<React.SetStateAction<ICharacter[]>>;
-}
+// export interface ISearchContext {
+//   searchTerm: string;
+//   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+//   results: ICharacter[];
+//   setResults: React.Dispatch<React.SetStateAction<ICharacter[]>>;
+// }

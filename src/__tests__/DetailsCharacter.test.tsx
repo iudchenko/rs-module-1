@@ -7,7 +7,6 @@ import {
 } from '@testing-library/react';
 import { Mock, afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { SearchProvider } from '../context/SearchContext';
 import { MOCK_CHARACTER } from './mockData';
 
 import DetailsClose from '../components/DetailsClose';
@@ -15,11 +14,9 @@ import Details from '../components/Details';
 
 const MockDetailedCard = () => {
   return (
-    <SearchProvider>
-      <MemoryRouter initialEntries={['/search/1?details=1']}>
-        <Details />
-      </MemoryRouter>
-    </SearchProvider>
+    <MemoryRouter initialEntries={['/search/1?details=1']}>
+      <Details />
+    </MemoryRouter>
   );
 };
 
@@ -29,11 +26,9 @@ const MockDetailsCloseButton = ({
   handleClose: () => void;
 }) => {
   return (
-    <SearchProvider>
-      <MemoryRouter>
-        <DetailsClose onClose={handleClose} />
-      </MemoryRouter>
-    </SearchProvider>
+    <MemoryRouter>
+      <DetailsClose onClose={handleClose} />
+    </MemoryRouter>
   );
 };
 

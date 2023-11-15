@@ -3,14 +3,16 @@ import { range } from '../utils/range';
 import { AppStatus } from '../types/types';
 
 type PaginationProps = {
-  status: AppStatus;
+  isLoading: boolean;
+  isFetching: boolean;
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
 };
 
 function Pagination({
-  status,
+  isLoading,
+  isFetching,
   currentPage,
   totalPages,
   onPageChange,
@@ -19,7 +21,8 @@ function Pagination({
 
   return (
     status !== AppStatus.loading &&
-    totalPages > 1 && (
+    totalPages > 1 &&
+    !(isLoading || isFetching) && (
       <div
         data-testid="pagination"
         className="text-white max-w-xl mx-auto flex flex-wrap justify-center gap-3"

@@ -12,6 +12,6 @@ describe('App not found route', () => {
     );
     expect(screen.getByText(/404 Not found./i)).toBeInTheDocument();
 
-    screen.debug();
+    // screen.debug();
   });
 });

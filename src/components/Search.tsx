@@ -1,17 +1,20 @@
 import React from 'react';
-import { AppStatus } from '../types/types';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import { RootState } from '../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchFor } from '../redux/search/search';
 
 interface ISearchProps {
-  searchTerm: string;
-  onSearch: (e: string) => void;
+  onPageChange: (page: number) => void;
 }
 
-function Search({ searchTerm, onSearch }: ISearchProps) {
+function Search({ onPageChange }: ISearchProps) {
   const [searchParams] = useSearchParams();
+  const { searchTerm } = useSelector((state: RootState) => state.search);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Search results
   const handleSearch = (e: React.SyntheticEvent) => {
@@ -28,15 +31,16 @@ function Search({ searchTerm, onSearch }: ISearchProps) {
     updatedSearchParams.delete('page');
     updatedSearchParams.delete('details');
 
-    navigate(`/?${updatedSearchParams.toString()}`);
-
     window.localStorage.setItem('searchTerm', searchTerm);
-    onSearch(searchTerm);
+
+    onPageChange(1);
+    dispatch(searchFor(searchTerm));
+    navigate(`/?${updatedSearchParams.toString()}`);
   };
 
   return (
     <div className="grow">
-      <form className="" onSubmit={handleSearch} role="search">
+      <form onSubmit={handleSearch} role="search">
         <SearchBar searchTerm={searchTerm} />
       </form>
     </div>

@@ -21,8 +21,8 @@ function Character({ id, character }: CharacterProps) {
   searchParams.set('details', '1');
 
   const handleClick = () => {
-    dispatch(changeViewMode(true));
     navigate(`/search/${id}?${searchParams.toString()}`);
+    dispatch(changeViewMode(true));
   };
 
   return (

@@ -25,7 +25,7 @@ function Pagination({
     !(isLoading || isFetching) && (
       <div
         data-testid="pagination"
-        className="text-white max-w-xl mx-auto flex flex-wrap justify-center gap-3"
+        className="text-white pt-4 max-w-xl mx-auto flex flex-wrap justify-center gap-3"
       >
         {pages.map((page) => {
           return (

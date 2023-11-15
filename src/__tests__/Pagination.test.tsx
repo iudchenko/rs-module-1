@@ -5,40 +5,27 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import {
-  Mock,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { MemoryRouter } from 'react-router-dom';
 import { MOCK_CHARACTERS_10 } from './mockData';
 import AppRoutes from '../components/AppRoutes';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 const mockedNavigator = vi.fn();
 
 const MockApp = () => {
   return (
-    <MemoryRouter>
-      <AppRoutes />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <AppRoutes />
+      </MemoryRouter>
+    </Provider>
   );
 };
 
 describe('Tests for the Pagination component', () => {
-  beforeAll(() => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(MOCK_CHARACTERS_10),
-      })
-    ) as Mock;
-  });
-
   // Render the app
   beforeEach(() => {
     render(<MockApp />);
@@ -71,7 +58,7 @@ describe('Tests for the Pagination component', () => {
       expect(href).toContain('/?page=5');
     });
 
-    screen.debug();
+    // screen.debug();
   });
 
   afterEach(() => {

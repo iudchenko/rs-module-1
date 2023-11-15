@@ -1,36 +1,22 @@
 import { waitFor, render, screen, fireEvent } from '@testing-library/react';
-import {
-  Mock,
-  afterEach,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
-import { MOCK_CHARACTERS_10 } from './mockData';
 
 import AppRoutes from '../components/AppRoutes';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 const MockApp = () => {
   return (
-    <MemoryRouter>
-      <AppRoutes />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <AppRoutes />
+      </MemoryRouter>
+    </Provider>
   );
 };
 
 describe('Tests for the Search component', () => {
-  beforeAll(() => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(MOCK_CHARACTERS_10),
-      })
-    ) as Mock;
-  });
-
   // Render the character
   beforeEach(() => {
     render(<MockApp />);

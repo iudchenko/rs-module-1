@@ -5,18 +5,48 @@ import {
   fireEvent,
   act,
 } from '@testing-library/react';
-import { Mock, afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { MOCK_CHARACTER } from './mockData';
 
 import DetailsClose from '../components/DetailsClose';
 import Details from '../components/Details';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
+import userEvent from '@testing-library/user-event';
 
-const MockDetailedCard = () => {
+import App from '../App';
+import DetailsCharacter from '../components/DetailsCharacter';
+
+const mockedNavigator = vi.fn();
+
+const MockApp = () => {
   return (
-    <MemoryRouter initialEntries={['/search/1?details=1']}>
-      <Details />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    </Provider>
+  );
+};
+
+const MockAppDetails = () => {
+  return (
+    <Provider store={store}>
+      <MemoryRouter>
+        <Details />
+      </MemoryRouter>
+    </Provider>
+  );
+};
+
+const MockAppDetailsLuke = () => {
+  return (
+    <Provider store={store}>
+      <MemoryRouter>
+        <DetailsCharacter details={MOCK_CHARACTER} />
+      </MemoryRouter>
+    </Provider>
   );
 };
 
@@ -26,35 +56,60 @@ const MockDetailsCloseButton = ({
   handleClose: () => void;
 }) => {
   return (
-    <MemoryRouter>
-      <DetailsClose onClose={handleClose} />
-    </MemoryRouter>
+    <Provider store={store}>
+      <MemoryRouter>
+        <DetailsClose onClose={handleClose} />
+      </MemoryRouter>
+    </Provider>
   );
 };
 
 describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
-    render(<MockDetailedCard />);
+    const user = userEvent.setup();
+    render(<MockApp />);
+
+    vi.mock('react-router-dom', async () => {
+      const actual = await vi.importActual('react-router-dom');
+      return {
+        ...(actual as object),
+        useNavigate: () => mockedNavigator,
+      };
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Luke Skywalker')).toBeInTheDocument();
+    });
+
+    const cards = screen.getAllByTestId('character-li');
+    const cardCount = cards.length;
+    expect(cardCount).toBe(10);
+
+    const card = screen.getAllByTestId('character-li')[0];
+
+    await user.click(card);
+
+    expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
+
+    render(<MockAppDetails />);
+
+    await waitFor(() => {
+      const modal = screen.getByTestId('modal');
+      expect(modal).toBeInTheDocument();
+    });
 
     await waitFor(() => {
       const spinner = screen.getByTestId('spinner');
       expect(spinner).toBeInTheDocument();
     });
+
+    // screen.debug();
   });
 
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {
-    global.fetch = vi.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(MOCK_CHARACTER),
-      })
-    ) as Mock;
-
-    render(<MockDetailedCard />);
+    render(<MockAppDetailsLuke />);
 
     await waitFor(() => {
-      const modal = screen.getByTestId('modal');
-      expect(modal).toBeInTheDocument();
-
       const name = screen.getByText(/Luke Skywalker/i);
       const birth_year = screen.getByText(/19BBY/i);
       const height = screen.getByText(/172/i);
@@ -62,7 +117,6 @@ describe('Tests for the Detailed Card component', () => {
       const gender = screen.getByText(/male/i);
       const skin_color = screen.getByText(/fair/i);
       const hair_color = screen.getByText(/blond/i);
-
       expect(name).toBeInTheDocument();
       expect(birth_year).toBeInTheDocument();
       expect(height).toBeInTheDocument();
@@ -71,6 +125,7 @@ describe('Tests for the Detailed Card component', () => {
       expect(skin_color).toBeInTheDocument();
       expect(hair_color).toBeInTheDocument();
     });
+
     screen.debug();
   });
 

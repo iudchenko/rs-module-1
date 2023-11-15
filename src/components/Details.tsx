@@ -5,12 +5,17 @@ import Spinner from './Spinner';
 import DetailsModal from './DetailsModal';
 import DetailsCharacter from './DetailsCharacter';
 import { useGetCharacterQuery } from '../redux/api/apiSlice';
+import { RootState } from '../redux/store';
+import { useSelector } from 'react-redux';
 
 function Details() {
   // const [details, setDetails] = useState<ICharacter | null>(null);
   const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const detailsOpened = Number(searchParams.get('details')) === 1 ? 1 : 0;
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const { viewModeDetailsOpen } = useSelector(
+    (state: RootState) => state.search
+  );
+  const detailsOpened = viewModeDetailsOpen ? 1 : 0;
 
   const {
     data: details,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import PageCountSelect from './components/PageCountSelect';

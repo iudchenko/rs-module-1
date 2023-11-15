@@ -17,6 +17,7 @@ import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 import DetailsCharacter from '../components/DetailsCharacter';
+import DetailsModal from '../components/DetailsModal';
 
 const mockedNavigator = vi.fn();
 
@@ -44,7 +45,9 @@ const MockAppDetailsLuke = () => {
   return (
     <Provider store={store}>
       <MemoryRouter>
-        <DetailsCharacter details={MOCK_CHARACTER} />
+        <DetailsModal>
+          <DetailsCharacter details={MOCK_CHARACTER} />
+        </DetailsModal>
       </MemoryRouter>
     </Provider>
   );

@@ -25,11 +25,11 @@ export const searchSlice = createSlice({
     changePerPage: (state, action) => {
       state.perPage = action.payload;
     },
-    changeViewMode: (state, action) => {
-      state.viewModeDetailsOpen = action.payload;
-    },
     changePage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    changeViewMode: (state, action) => {
+      state.viewModeDetailsOpen = action.payload;
     },
   },
 });

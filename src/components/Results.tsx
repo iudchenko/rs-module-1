@@ -2,7 +2,7 @@ import Spinner from './Spinner';
 import Character from './Character';
 import { ICharacter } from '../types/types';
 import { useGetCharactersQuery } from '../redux/api/apiSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Pagination from './Pagination';
 import { RootState } from '../redux/store';
 

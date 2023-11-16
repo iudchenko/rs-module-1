@@ -3,13 +3,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchFor } from '../redux/search/search';
+import { changePage, searchFor } from '../redux/search/search';
 
-interface ISearchProps {
-  onPageChange: (page: number) => void;
-}
-
-function Search({ onPageChange }: ISearchProps) {
+function Search() {
   const [searchParams] = useSearchParams();
   const { searchTerm } = useSelector((state: RootState) => state.search);
 
@@ -33,7 +29,8 @@ function Search({ onPageChange }: ISearchProps) {
 
     window.localStorage.setItem('searchTerm', searchTerm);
 
-    onPageChange(1);
+    // onPageChange(1);
+    dispatch(changePage(1));
     dispatch(searchFor(searchTerm));
     navigate(`/?${updatedSearchParams.toString()}`);
   };

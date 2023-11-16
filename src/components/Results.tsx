@@ -11,13 +11,8 @@ import {
   ITEMS_PER_PAGE_SMALL,
 } from '../utils/constants';
 
-interface IResultsProps {
-  currentPage: number;
-  onPageChange: (page: number) => void;
-}
-
-function Results({ currentPage, onPageChange }: IResultsProps) {
-  const { searchTerm, perPage } = useSelector(
+function Results() {
+  const { searchTerm, perPage, currentPage } = useSelector(
     (state: RootState) => state.search
   );
   const currentPagePaged =
@@ -71,7 +66,6 @@ function Results({ currentPage, onPageChange }: IResultsProps) {
         isFetching={isFetching}
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={onPageChange}
       />
     </main>
   );

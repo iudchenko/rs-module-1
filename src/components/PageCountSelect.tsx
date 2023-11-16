@@ -5,13 +5,9 @@ import {
 import { RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { changePerPage } from '../redux/search/search';
+import { changePage, changePerPage } from '../redux/search/search';
 
-type PageCountSelectProps = {
-  onPageChange: (page: number) => void;
-};
-
-function PageCountSelect({ onPageChange }: PageCountSelectProps) {
+function PageCountSelect() {
   const { perPage } = useSelector((state: RootState) => state.search);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -19,7 +15,7 @@ function PageCountSelect({ onPageChange }: PageCountSelectProps) {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(changePerPage(Number(e.target.value)));
     window.localStorage.setItem('perPage', e.target.value);
-    onPageChange(1);
+    dispatch(changePage(1));
     navigate(`/`);
   };
 

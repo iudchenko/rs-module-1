@@ -6,7 +6,7 @@ import {
   act,
 } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 import { MOCK_CHARACTER } from './mockData';
 
 import DetailsClose from '../components/DetailsClose';
@@ -18,23 +18,15 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import DetailsCharacter from '../components/DetailsCharacter';
 import DetailsModal from '../components/DetailsModal';
+import AppRoutes from '../components/AppRoutes';
 
 const mockedNavigator = vi.fn();
 
-const MockApp = () => {
+const MockAppWithDetails = () => {
   return (
     <Provider store={store}>
       <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    </Provider>
-  );
-};
-
-const MockAppDetails = () => {
-  return (
-    <Provider store={store}>
-      <MemoryRouter>
+        <AppRoutes />
         <Details />
       </MemoryRouter>
     </Provider>
@@ -70,7 +62,7 @@ const MockDetailsCloseButton = ({
 describe('Tests for the Detailed Card component', () => {
   it('Check that a loading indicator is displayed while fetching data', async () => {
     const user = userEvent.setup();
-    render(<MockApp />);
+    render(<MockAppWithDetails />);
 
     vi.mock('react-router-dom', async () => {
       const actual = await vi.importActual('react-router-dom');
@@ -94,19 +86,17 @@ describe('Tests for the Detailed Card component', () => {
 
     expect(mockedNavigator).toHaveBeenCalledWith('/search/1?details=1');
 
-    render(<MockAppDetails />);
-
     await waitFor(() => {
-      const modal = screen.getByTestId('modal');
+      const modal = screen.queryByTestId('modal');
       expect(modal).toBeInTheDocument();
     });
 
     await waitFor(() => {
-      const spinner = screen.getByTestId('spinner');
-      expect(spinner).toBeInTheDocument();
+      const detailsSpinner = screen.getByTestId('details-spinner');
+      expect(detailsSpinner).toBeInTheDocument();
     });
 
-    // screen.debug();
+    screen.debug();
   });
 
   it('Make sure the detailed card component correctly displays the detailed card data', async () => {

@@ -27,7 +27,11 @@ function Details() {
     <>
       {detailsOpened === 1 && (
         <DetailsModal>
-          {getCharacterLoading && <Spinner />}
+          {getCharacterLoading && (
+            <div data-testid="details-spinner">
+              <Spinner />
+            </div>
+          )}
           {isSuccessDetails && !getCharacterLoading && details !== null && (
             <DetailsCharacter details={details} />
           )}

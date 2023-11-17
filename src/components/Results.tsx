@@ -15,6 +15,10 @@ function Results() {
   const { searchTerm, perPage, currentPage } = useSelector(
     (state: RootState) => state.search
   );
+  const { getCharactersLoading } = useSelector(
+    (state: RootState) => state.loading
+  );
+
   const currentPagePaged =
     perPage === ITEMS_PER_PAGE_MEDIUM
       ? currentPage
@@ -43,9 +47,9 @@ function Results() {
   return (
     <main className="p-5 w-full max-w-xl mx-auto flex flex-col items-start bg-gray-700/50 backdrop-blur-sm rounded-lg">
       <ul className="flex flex-col gap-2 w-full">
-        {(isLoading || isFetching) && <Spinner />}
+        {getCharactersLoading && <Spinner />}
         {isSuccess &&
-          !(isLoading || isFetching) &&
+          !getCharactersLoading &&
           results?.length > 0 &&
           results?.map((character: ICharacter) => {
             const id = Number(
@@ -56,7 +60,7 @@ function Results() {
             );
             return <Character key={id} id={id} character={character} />;
           })}
-        {isSuccess && !(isLoading || isFetching) && results?.length === 0 && (
+        {isSuccess && !getCharactersLoading && results?.length === 0 && (
           <p className="text-white">Nothing found</p>
         )}
         {isError && <p className="text-white">Something went wrong</p>}

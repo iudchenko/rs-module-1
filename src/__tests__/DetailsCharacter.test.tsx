@@ -123,14 +123,13 @@ describe('Tests for the Detailed Card component', () => {
   });
 
   it('Ensure that clicking the close button hides the component', async () => {
+    const user = userEvent.setup();
     const mockHandleClose = vi.fn();
     render(<MockDetailsCloseButton handleClose={mockHandleClose} />);
 
     const modalClose = screen.getByTestId('close-btn');
 
-    act(() => {
-      fireEvent.click(modalClose);
-    });
+    await user.click(modalClose);
 
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });

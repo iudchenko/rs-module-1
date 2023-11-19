@@ -10,6 +10,7 @@ import ErrorButton from './components/ErrorButton';
 import Header from './components/Header';
 
 const App = () => {
+  console.log('test');
   return (
     <ErrorBoundary>
       <AppWrapper>

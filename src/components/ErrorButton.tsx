@@ -1,11 +1,11 @@
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 function ErrorButton() {
   const [error, setError] = useState(false);
-
   if (error) {
     // This will trigger the error boundary
-    throw new Error('An error occurred and caught by the ErrorBoundary.');
+    throw new Error("An error occurred and caught by the ErrorBoundary.");
   }
 
   return (

@@ -1,28 +1,49 @@
-import React, { Component, ErrorInfo } from 'react';
+"use client";
+import React, { Component, ReactNode, ErrorInfo } from "react";
 
 interface ErrorBoundaryProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps> {
-  state = { hasError: false };
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    this.setState({ hasError: true });
-    // You can log the error or perform any other error handling here
-    console.error('Error caught by error boundary:', error, errorInfo);
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+
+    // Define a state variable to track whether there is an error or not
+    this.state = { hasError: false };
   }
 
-  render() {
+  static getDerivedStateFromError(error: any): ErrorBoundaryState {
+    // Update state so the next render will show the fallback UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any): void {
+    console.error({ error, errorInfo });
+  }
+
+  render(): ReactNode {
+    // Check if the error is thrown
     if (this.state.hasError) {
+      // You can render any custom fallback UI
       return (
-        <div className="w-full h-screen bg-sw-bg bg-cover bg-no-repeat bg-top">
-          <div className="p-5 max-w-3xl mx-auto">
-            <p className="text-white">Something went wrong.</p>
-          </div>
+        <div>
+          <h2>Oops, there is an error!</h2>
+          <button
+            type="button"
+            onClick={() => this.setState({ hasError: false })}
+          >
+            Try again?
+          </button>
         </div>
       );
     }
+
+    // Return children components in case of no error
     return this.props.children;
   }
 }

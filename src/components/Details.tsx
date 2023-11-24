@@ -1,14 +1,20 @@
-import { useParams } from 'react-router-dom';
-import Spinner from './Spinner';
-import DetailsModal from './DetailsModal';
-import DetailsCharacter from './DetailsCharacter';
+import Spinner from "./Spinner";
+import DetailsModal from "./DetailsModal";
+import DetailsCharacter from "./DetailsCharacter";
 
-import { useGetCharacterQuery } from '../redux/api/apiSlice';
-import { RootState } from '../redux/store';
-import { useSelector } from 'react-redux';
+import { useGetCharacterQuery } from "../redux/api/apiSlice";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 function Details() {
-  const { id } = useParams();
+  const router = useRouter();
+
+  const {
+    query: { id },
+  } = router;
+
   const { viewModeDetailsOpen } = useSelector(
     (state: RootState) => state.search
   );

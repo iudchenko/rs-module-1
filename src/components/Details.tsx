@@ -5,7 +5,6 @@ import DetailsCharacter from "./DetailsCharacter";
 import { useGetCharacterQuery } from "../redux/api/apiSlice";
 import { RootState } from "../redux/store";
 import { useSelector } from "react-redux";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 
 function Details() {
@@ -23,11 +22,13 @@ function Details() {
   );
   const detailsOpened = viewModeDetailsOpen ? 1 : 0;
 
+  const skipFlag = id ? false : true;
+
   const {
     data: details,
     isSuccess: isSuccessDetails,
     isError: isErrorDetails,
-  } = useGetCharacterQuery(id);
+  } = useGetCharacterQuery(id, { skip: skipFlag });
 
   return (
     <>

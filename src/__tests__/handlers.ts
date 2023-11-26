@@ -1,19 +1,19 @@
-import { http, HttpResponse } from 'msw';
-import { API_URL } from '../utils/constants';
+import { http, HttpResponse } from "msw";
+import { API_URL } from "../utils/constants";
 import {
   MOCK_CHARACTER,
   MOCK_CHARACTERS_1,
   MOCK_CHARACTERS_10,
   MOCK_NOTHING_FOUND,
-} from './mockData';
-import { ICharacter } from '../types/types';
+} from "../__mocks__/mockData";
+import { ICharacter } from "../types/types";
 
 export const handlers = [
   http.get(API_URL, ({ request }) => {
     const url = new URL(request.url);
-    const searchKylo = url.searchParams.get('search');
+    const searchKylo = url.searchParams.get("search");
 
-    if (searchKylo === 'kylo ren') {
+    if (searchKylo === "kylo ren") {
       return HttpResponse.json<{
         count: number;
         next: null;

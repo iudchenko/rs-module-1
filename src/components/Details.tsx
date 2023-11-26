@@ -1,3 +1,4 @@
+import React from "react";
 import Spinner from "./Spinner";
 import DetailsModal from "./DetailsModal";
 import DetailsCharacter from "./DetailsCharacter";

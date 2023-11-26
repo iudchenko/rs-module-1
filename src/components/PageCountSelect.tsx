@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ITEMS_PER_PAGE_MEDIUM,
   ITEMS_PER_PAGE_SMALL,

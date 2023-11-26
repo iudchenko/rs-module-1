@@ -13,7 +13,8 @@ Object.assign(globalThis, {
   AbortController,
 });
 
-const { wrapper } = require("../redux/store");
+// const { wrapper } = require("../redux/store");
+import { wrapper } from "../redux/store";
 
 export function App({ Component, pageProps }: AppProps) {
   return (

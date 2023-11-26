@@ -1,3 +1,5 @@
+import React from "react";
+
 interface IHeaderProps {
   children: React.ReactNode;
 }

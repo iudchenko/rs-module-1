@@ -1,3 +1,4 @@
+import React from "react";
 // import { Link } from 'react-router-dom';
 import { range } from "../utils/range";
 import { AppStatus } from "../types/types";

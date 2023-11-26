@@ -1,4 +1,5 @@
 // import { useLocation } from 'react-router-dom';
+import React from "react";
 import { useRouter } from "next/router";
 
 import { ICharacter } from "../types/types";

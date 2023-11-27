@@ -1,15 +1,16 @@
-import Spinner from './Spinner';
-import Character from './Character';
-import { ICharacter } from '../types/types';
-import { useGetCharactersQuery } from '../redux/api/apiSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import Pagination from './Pagination';
-import { RootState } from '../redux/store';
+import React from "react";
+import Spinner from "./Spinner";
+import Character from "./Character";
+import { ICharacter } from "../types/types";
+import { useGetCharactersQuery } from "../redux/api/apiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Pagination from "./Pagination";
+import { RootState } from "../redux/store";
 
 import {
   ITEMS_PER_PAGE_MEDIUM,
   ITEMS_PER_PAGE_SMALL,
-} from '../utils/constants';
+} from "../utils/constants";
 
 function Results() {
   const { searchTerm, perPage, currentPage } = useSelector(
@@ -54,7 +55,7 @@ function Results() {
           results?.map((character: ICharacter) => {
             const id = Number(
               character.url
-                .split('/')
+                .split("/")
                 .filter((element) => element)
                 .pop()
             );

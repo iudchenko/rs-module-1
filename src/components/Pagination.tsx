@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
-import { range } from '../utils/range';
-import { AppStatus } from '../types/types';
-import { useDispatch } from 'react-redux';
-import { changePage } from '../redux/search/search';
+import React from "react";
+// import { Link } from 'react-router-dom';
+import { range } from "../utils/range";
+import { AppStatus } from "../types/types";
+import { useDispatch } from "react-redux";
+import { changePage } from "../redux/search/search";
+import Link from "next/link";
 
 type PaginationProps = {
   isLoading: boolean;
@@ -22,7 +24,7 @@ function Pagination({
   const dispatch = useDispatch();
 
   return (
-    status !== AppStatus.loading &&
+    // status !== AppStatus.loading &&
     totalPages > 1 &&
     !(isLoading || isFetching) && (
       <div
@@ -34,12 +36,12 @@ function Pagination({
             <Link
               key={page}
               data-testid={`page-${page}`}
-              to={`/?page=${page}`}
+              href={`/?page=${page}`}
               onClick={() => dispatch(changePage(page))}
               className={`w-8 h-8 text-sm flex items-center justify-center transition rounded ${
                 currentPage === page
-                  ? 'bg-white text-gray-500'
-                  : 'bg-gray-500/50 hover:bg-gray-500/70'
+                  ? "bg-white text-gray-500"
+                  : "bg-gray-500/50 hover:bg-gray-500/70"
               }`}
             >
               {page}

@@ -1,22 +1,34 @@
+import React from "react";
 import {
   ITEMS_PER_PAGE_MEDIUM,
   ITEMS_PER_PAGE_SMALL,
-} from '../utils/constants';
-import { RootState } from '../redux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { changePage, changePerPage } from '../redux/search/search';
+} from "../utils/constants";
+import { RootState } from "../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
+import { changePage, changePerPage, searchFor } from "../redux/search/search";
+import { useEffect } from "react";
 
 function PageCountSelect() {
   const { perPage } = useSelector((state: RootState) => state.search);
-  const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedPerPage = window.localStorage.getItem("perPage");
+      if (savedPerPage) {
+        dispatch(changePerPage(Number(savedPerPage)));
+      }
+    }
+  }, [dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(changePerPage(Number(e.target.value)));
-    window.localStorage.setItem('perPage', e.target.value);
+    window.localStorage.setItem("perPage", e.target.value);
     dispatch(changePage(1));
-    navigate(`/`);
+    router.push("/");
   };
 
   return (

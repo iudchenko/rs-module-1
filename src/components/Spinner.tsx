@@ -1,3 +1,5 @@
+import React from "react";
+
 function Spinner() {
   return (
     <div role="status" className="mx-auto" data-testid="spinner">

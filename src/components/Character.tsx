@@ -1,8 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router';
-import { ICharacter } from '../types/types';
-import { changeViewMode } from '../redux/search/search';
-import { useDispatch } from 'react-redux';
+// import { useLocation } from 'react-router-dom';
+import React from "react";
+import { useRouter } from "next/router";
+
+import { ICharacter } from "../types/types";
+import { changeViewMode } from "../redux/search/search";
+import { useDispatch } from "react-redux";
 
 type CharacterProps = {
   id: number;
@@ -12,16 +14,25 @@ type CharacterProps = {
 function Character({ id, character }: CharacterProps) {
   const { name, birth_year } = character;
 
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { pathname, query } = router;
   const dispatch = useDispatch();
 
   // Get the current location object
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  searchParams.set('details', '1');
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
+  // searchParams.set("details", "1");
+  // router.push({
+  //   pathname, // replace with your desired path
+  //   query: { details: "1" }, // set your parameter and its value
+  // });
 
   const handleClick = () => {
-    navigate(`/search/${id}?${searchParams.toString()}`);
+    // router.push(`/search/${id}?${searchParams.toString()}`);
+    router.push({
+      pathname: `/search/${id}`, // replace with your desired path
+      query: { details: "1" }, // set your parameter and its value
+    });
     dispatch(changeViewMode(true));
   };
 

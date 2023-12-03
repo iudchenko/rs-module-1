@@ -2,9 +2,9 @@ import { Link, Outlet } from 'react-router-dom';
 
 function Layout() {
   return (
-    <div>
+    <div className="container mx-auto p-5">
       <nav>
-        <ul>
+        <ul className="flex gap-8 text-white ">
           <li>
             <Link to="/">Main</Link>
           </li>
@@ -17,7 +17,9 @@ function Layout() {
         </ul>
       </nav>
 
-      <Outlet />
+      <div className="container max-w-3xl mx-auto">
+        <Outlet />
+      </div>
     </div>
   );
 }

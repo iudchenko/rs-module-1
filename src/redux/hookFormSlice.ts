@@ -1,36 +1,63 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { Country, Gender, type FormState } from '../interfaces/interfaces';
 
-export interface CounterState {
-  value: number;
-}
-
-const initialState: CounterState = {
-  value: 0,
+const initialState: FormState = {
+  name: '',
+  age: null,
+  email: '',
+  password: '',
+  passwordConfirmation: '',
+  gender: Gender.DEFAULT,
+  accept: false,
+  picture: '',
+  country: Country.DEFAULT,
 };
 
 export const hookFormSlice = createSlice({
-  name: 'hookForm',
+  name: 'hook',
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    changeName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    changeAge: (state, action: PayloadAction<number>) => {
+      state.age = action.payload;
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    changeEmail: (state, action: PayloadAction<string>) => {
+      state.email = action.payload;
+    },
+    changePassword: (state, action: PayloadAction<string>) => {
+      state.password = action.payload;
+    },
+    changePasswordConfirmation: (state, action: PayloadAction<string>) => {
+      state.passwordConfirmation = action.payload;
+    },
+    changeGender: (state, action: PayloadAction<Gender>) => {
+      state.gender = action.payload;
+    },
+    changeAccept: (state, action: PayloadAction<boolean>) => {
+      state.accept = action.payload;
+    },
+    changePicture: (state, action: PayloadAction<string>) => {
+      state.picture = action.payload;
+    },
+    changeCountry: (state, action: PayloadAction<Country>) => {
+      state.country = action.payload;
     },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } =
-  hookFormSlice.actions;
+export const {
+  changeName,
+  changeAge,
+  changeEmail,
+  changePassword,
+  changePasswordConfirmation,
+  changeGender,
+  changeAccept,
+  changePicture,
+  changeCountry,
+} = hookFormSlice.actions;
 
 export default hookFormSlice.reducer;

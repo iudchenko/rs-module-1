@@ -160,7 +160,11 @@ const Form2 = () => {
             <label htmlFor="gender" className="label">
               Gender
             </label>
-            <select {...field} onBlur={() => onBlur('gender')}>
+            <select
+              {...field}
+              onBlur={() => onBlur('gender')}
+              className="select"
+            >
               <option value="" disabled>
                 Please, select
               </option>

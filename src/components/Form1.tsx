@@ -5,6 +5,7 @@ import { useTypedSelector } from '../redux/useTypedSelector';
 import { formSchema } from '../validations/formValidation';
 import { useState } from 'react';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 const Form1 = () => {
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
@@ -14,6 +15,7 @@ const Form1 = () => {
   const countries = useTypedSelector((state) => state.countries.countries);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,15 +51,6 @@ const Form1 = () => {
       country: target.country.value,
     };
 
-    // const validationErrors: ValidationErrors = {};
-    // try {
-    //   await formSchema.validate(formSubmission, { abortEarly: false });
-    // } catch (errors) {
-    //   errors.inner.forEach((error: any) => {
-    //     validationErrors[error.path] = error.message;
-    //   });
-    // }
-
     const validationErrors: ValidationErrors = {};
     try {
       await formSchema.validate(formSubmission, { abortEarly: false });
@@ -73,12 +66,10 @@ const Form1 = () => {
 
     setValidationErrors(validationErrors);
 
-    // const isValid = await formSchema.isValid(formSubmission);
-    // console.log(isValid);
-
     if (Object.keys(validationErrors).length === 0) {
       // Form is valid, proceed with submission
       dispatch(saveFormData(formSubmission));
+      navigate('/');
     }
   };
 
@@ -146,17 +137,12 @@ const Form1 = () => {
       <label htmlFor="gender" className="label">
         Gender
       </label>
-      <select
-        id="gender"
-        name="gender"
-        className="select"
-        defaultValue="Please, select"
-      >
-        <option disabled>Please, select</option>
-
+      <select id="gender" name="gender" className="select" defaultValue="">
+        <option value="" disabled>
+          Please, select
+        </option>
         <option value="male">Male</option>
         <option value="female">Female</option>
-        <option value="other">Other</option>
       </select>
       {validationErrors.gender && (
         <p className="validation-error">{validationErrors.gender}</p>
@@ -191,13 +177,10 @@ const Form1 = () => {
         <label htmlFor="country" className="checkbox-label">
           Country
         </label>
-        <select
-          id="country"
-          name="country"
-          className="select"
-          defaultValue="Please, select"
-        >
-          <option disabled>Please, select</option>
+        <select id="country" name="country" className="select" defaultValue="">
+          <option value="" disabled>
+            Please, select
+          </option>
 
           {countries.map((country) => (
             <option key={country} value={country}>

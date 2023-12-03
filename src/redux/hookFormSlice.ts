@@ -1,63 +1,37 @@
-// import { createSlice } from '@reduxjs/toolkit';
-// import type { PayloadAction } from '@reduxjs/toolkit';
-// import { Country, Gender, type FormState } from '../interfaces/interfaces';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { type HookFormState } from '../interfaces/interfaces';
 
-// const initialState: FormState = {
-//   name: '',
-//   age: null,
-//   email: '',
-//   password: '',
-//   confirmPassword: '',
-//   gender: Gender.DEFAULT,
-//   accept: false,
-//   picture: '',
-//   country: Country.DEFAULT,
-// };
+const initialState: HookFormState = {
+  name: '',
+  age: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  gender: '',
+  accept: '',
+  picture: undefined,
+  country: '',
+};
 
-// export const hookFormSlice = createSlice({
-//   name: 'hook',
-//   initialState,
-//   reducers: {
-//     changeName: (state, action: PayloadAction<string>) => {
-//       state.name = action.payload;
-//     },
-//     changeAge: (state, action: PayloadAction<number>) => {
-//       state.age = action.payload;
-//     },
-//     changeEmail: (state, action: PayloadAction<string>) => {
-//       state.email = action.payload;
-//     },
-//     changePassword: (state, action: PayloadAction<string>) => {
-//       state.password = action.payload;
-//     },
-//     changePasswordConfirmation: (state, action: PayloadAction<string>) => {
-//       state.confirmPassword = action.payload;
-//     },
-//     changeGender: (state, action: PayloadAction<Gender>) => {
-//       state.gender = action.payload;
-//     },
-//     changeAccept: (state, action: PayloadAction<boolean>) => {
-//       state.accept = action.payload;
-//     },
-//     changePicture: (state, action: PayloadAction<string>) => {
-//       state.picture = action.payload;
-//     },
-//     changeCountry: (state, action: PayloadAction<Country>) => {
-//       state.country = action.payload;
-//     },
-//   },
-// });
+export const hookFormSlice = createSlice({
+  name: 'hookFormSlice',
+  initialState,
+  reducers: {
+    saveHookFormData: (state, action: PayloadAction<HookFormState>) => {
+      state.name = action.payload.name;
+      state.age = action.payload.age;
+      state.email = action.payload.email;
+      state.password = action.payload.password;
+      state.confirmPassword = action.payload.confirmPassword;
+      state.gender = action.payload.gender;
+      state.accept = action.payload.accept;
+      state.picture = action.payload.picture;
+      state.country = action.payload.country;
+    },
+  },
+});
 
-// export const {
-//   changeName,
-//   changeAge,
-//   changeEmail,
-//   changePassword,
-//   changePasswordConfirmation,
-//   changeGender,
-//   changeAccept,
-//   changePicture,
-//   changeCountry,
-// } = hookFormSlice.actions;
+export const { saveHookFormData } = hookFormSlice.actions;
 
-// export default hookFormSlice.reducer;
+export default hookFormSlice.reducer;

@@ -8,6 +8,7 @@ export const formSchema = yup.object().shape({
   age: yup
     .number()
     .required('Age is required')
+    .typeError('Age must be a number')
     .positive('Age must be a positive number')
     .integer('Age must be an integer'),
   email: yup.string().email('Email is invalid').required('Email is required'),
@@ -22,7 +23,7 @@ export const formSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password'), undefined], 'Passwords must match' as const)
     .required('Confirm Password is required'),
-  gender: yup.string(),
+  gender: yup.string().required('Gender is required'),
   accept: yup
     .boolean()
     .oneOf([true], 'You must accept the terms and conditions')

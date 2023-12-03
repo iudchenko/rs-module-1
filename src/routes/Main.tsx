@@ -13,15 +13,15 @@ const Main = () => {
   const country1 = useTypedSelector((state) => state.unhandled.country);
 
   // Form 2
-  // const name2 = useTypedSelector((state) => state.hook.name);
-  // const age2 = useTypedSelector((state) => state.hook.age);
-  // const email2 = useTypedSelector((state) => state.hook.email);
-  // const pw2 = useTypedSelector((state) => state.hook.password);
-  // const pwc2 = useTypedSelector((state) => state.hook.confirmPassword);
-  // const gender2 = useTypedSelector((state) => state.hook.gender);
-  // const accept2 = useTypedSelector((state) => state.hook.accept);
+  const name2 = useTypedSelector((state) => state.hook.name);
+  const age2 = useTypedSelector((state) => state.hook.age);
+  const email2 = useTypedSelector((state) => state.hook.email);
+  const pw2 = useTypedSelector((state) => state.hook.password);
+  const pwc2 = useTypedSelector((state) => state.hook.confirmPassword);
+  const gender2 = useTypedSelector((state) => state.hook.gender);
+  const accept2 = useTypedSelector((state) => state.hook.accept);
   // const picture2 = useTypedSelector((state) => state.hook.picture);
-  // const country2 = useTypedSelector((state) => state.hook.country);
+  const country2 = useTypedSelector((state) => state.hook.country);
 
   return (
     <main className="prose text-white ">
@@ -39,7 +39,7 @@ const Main = () => {
           {picture1 && <img src={picture1} className="max-w-xs" />}
           <p>Country: {country1}</p>
         </div>
-        {/* <div className="p-5">
+        <div className="p-5">
           <h2 className="text-white">Hook Form</h2>
           <p>Name: {name2}</p>
           <p>Age: {age2}</p>
@@ -49,9 +49,9 @@ const Main = () => {
           <p>Gender: {gender2}</p>
           <p>Terms: {accept2 ? 'accepted' : ''}</p>
           <p>Picture:</p>
-          {picture2 && <img src={picture2} className="max-w-xs" />}
+          {/* {picture2 && <img src={picture2} className="max-w-xs" />} */}
           <p>Country: {country2}</p>
-        </div> */}
+        </div>
       </div>
     </main>
   );

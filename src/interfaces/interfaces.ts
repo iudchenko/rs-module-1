@@ -9,6 +9,17 @@ export interface FormState {
   picture: string;
   country: Country | null;
 }
+export interface HookFormState {
+  name: string;
+  age: number | string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: Gender | string;
+  accept: boolean | string;
+  picture: File | string | undefined;
+  country: Country | string;
+}
 
 export interface ValidationErrors {
   name?: string;

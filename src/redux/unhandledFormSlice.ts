@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Country, Gender, type FormState } from '../interfaces/interfaces';
+import { type FormState } from '../interfaces/interfaces';
 
 const initialState: FormState = {
   name: '',
   age: null,
   email: '',
   password: '',
-  passwordConfirmation: '',
-  gender: Gender.DEFAULT,
+  confirmPassword: '',
+  gender: null,
   accept: false,
   picture: '',
-  country: Country.DEFAULT,
+  country: null,
 };
 
 export const unhandledFormSlice = createSlice({
@@ -23,7 +23,7 @@ export const unhandledFormSlice = createSlice({
       state.age = action.payload.age;
       state.email = action.payload.email;
       state.password = action.payload.password;
-      state.passwordConfirmation = action.payload.passwordConfirmation;
+      state.confirmPassword = action.payload.confirmPassword;
       state.gender = action.payload.gender;
       state.accept = action.payload.accept;
       state.picture = action.payload.picture;

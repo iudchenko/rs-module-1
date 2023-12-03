@@ -3,15 +3,26 @@ export interface FormState {
   age: number | null;
   email: string;
   password: string;
-  passwordConfirmation: string;
-  gender: Gender;
+  confirmPassword: string;
+  gender: Gender | null;
   accept: boolean;
   picture: string;
-  country: Country;
+  country: Country | null;
 }
 
+export interface ValidationErrors {
+  name?: string;
+  age?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  gender?: string;
+  accept?: string;
+  picture?: string;
+  country?: string;
+  [key: string]: string | undefined; // Index signa
+}
 export enum Gender {
-  DEFAULT = 'Select Gender',
   MALE = 'Male',
   FEMALE = 'Female',
 }
@@ -21,7 +32,6 @@ export interface Countries {
 }
 
 export enum Country {
-  DEFAULT = 'Select Country',
   AF = 'Afghanistan',
   AX = 'AlandIslands',
   AL = 'Albania',

@@ -20,7 +20,7 @@ const Main = () => {
   const pwc2 = useTypedSelector((state) => state.hook.confirmPassword);
   const gender2 = useTypedSelector((state) => state.hook.gender);
   const accept2 = useTypedSelector((state) => state.hook.accept);
-  // const picture2 = useTypedSelector((state) => state.hook.picture);
+  const picture2 = useTypedSelector((state) => state.hook.picture);
   const country2 = useTypedSelector((state) => state.hook.country);
 
   return (
@@ -49,7 +49,7 @@ const Main = () => {
           <p>Gender: {gender2}</p>
           <p>Terms: {accept2 ? 'accepted' : ''}</p>
           <p>Picture:</p>
-          {/* {picture2 && <img src={picture2} className="max-w-xs" />} */}
+          {picture2 && <img src={picture2 as string} className="max-w-xs" />}
           <p>Country: {country2}</p>
         </div>
       </div>

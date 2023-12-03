@@ -26,7 +26,7 @@ const Form2 = () => {
       confirmPassword: '',
       gender: '',
       accept: false,
-      picture: undefined,
+      picture: '',
       country: '',
     },
   });
@@ -51,33 +51,33 @@ const Form2 = () => {
   const countries = useTypedSelector((state) => state.countries.countries);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-2">
       <div>
-        <label>Name</label>
+        <label className="label">Name</label>
         <Controller
           name="name"
           control={control}
           render={({ field }) => (
-            <>
+            <div>
               <input
                 {...field}
                 placeholder="Name"
                 onBlur={() => onBlur('name')}
                 className="input"
               />
-              <p>{errors.name?.message}</p>
-            </>
+              <p className="validation-error">{errors.name?.message}</p>
+            </div>
           )}
         />
       </div>
 
       <div>
-        <label>Age</label>
+        <label className="label">Age</label>
         <Controller
           name="age"
           control={control}
           render={({ field }) => (
-            <>
+            <div>
               <input
                 {...field}
                 placeholder="Age"
@@ -85,8 +85,8 @@ const Form2 = () => {
                 onBlur={() => onBlur('age')}
                 className="input"
               />
-              <p>{errors.age?.message}</p>
-            </>
+              <p className="validation-error">{errors.age?.message}</p>
+            </div>
           )}
         />
       </div>
@@ -95,7 +95,7 @@ const Form2 = () => {
         name="email"
         control={control}
         render={({ field }) => (
-          <>
+          <div>
             <label htmlFor="email" className="label">
               Email
             </label>
@@ -105,8 +105,8 @@ const Form2 = () => {
               onBlur={() => onBlur('email')}
               className="input"
             />
-            <p>{errors.email?.message}</p>
-          </>
+            <p className="validation-error">{errors.email?.message}</p>
+          </div>
         )}
       />
 
@@ -114,7 +114,7 @@ const Form2 = () => {
         name="password"
         control={control}
         render={({ field }) => (
-          <>
+          <div>
             <label htmlFor="password" className="label">
               Password
             </label>
@@ -125,8 +125,8 @@ const Form2 = () => {
               onBlur={() => onBlur('password')}
               className="input"
             />
-            <p>{errors.password?.message}</p>
-          </>
+            <p className="validation-error">{errors.password?.message}</p>
+          </div>
         )}
       />
 
@@ -134,7 +134,7 @@ const Form2 = () => {
         name="confirmPassword"
         control={control}
         render={({ field }) => (
-          <>
+          <div>
             <label htmlFor="confirmPassword" className="label">
               Confirm Password
             </label>
@@ -145,8 +145,10 @@ const Form2 = () => {
               onBlur={() => onBlur('confirmPassword')}
               className="input"
             />
-            <p>{errors.confirmPassword?.message}</p>
-          </>
+            <p className="validation-error">
+              {errors.confirmPassword?.message}
+            </p>
+          </div>
         )}
       />
 
@@ -154,7 +156,7 @@ const Form2 = () => {
         name="gender"
         control={control}
         render={({ field }) => (
-          <>
+          <div>
             <label htmlFor="gender" className="label">
               Gender
             </label>
@@ -165,8 +167,8 @@ const Form2 = () => {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-            <p>{errors.gender?.message}</p>
-          </>
+            <p className="validation-error">{errors.gender?.message}</p>
+          </div>
         )}
       />
 
@@ -174,10 +176,11 @@ const Form2 = () => {
         name="accept"
         control={control}
         render={({ field }) => (
-          <>
+          <div className="flex gap-2 align-center">
             <input
               {...field}
               type="checkbox"
+              id="accept"
               value="false"
               onBlur={() => onBlur('accept')}
               className="checkbox"
@@ -185,8 +188,8 @@ const Form2 = () => {
             <label htmlFor="accept" className="checkbox-label">
               Accept T&C
             </label>
-            <p>{errors.accept?.message}</p>
-          </>
+            <p className="validation-error">{errors.accept?.message}</p>
+          </div>
         )}
       />
 
@@ -194,19 +197,31 @@ const Form2 = () => {
         name="picture"
         control={control}
         render={({ field }) => (
-          <>
-            <label htmlFor="picture">Upload Picture</label>
+          <div>
+            <label htmlFor="picture" className="label">
+              Upload Picture
+            </label>
             <input
               type="file"
               accept=".png, .jpeg"
               className="input-file"
               onChange={(e) => {
                 const file = e.target.files?.[0];
-                field.onChange(file);
+
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onloadend = () => {
+                    const base64String = reader.result as string;
+                    // console.log(base64String);
+                    field.onChange(base64String);
+                  };
+
+                  reader.readAsDataURL(file);
+                }
               }}
             />
-            <p>{errors.picture?.message}</p>
-          </>
+            <p className="validation-error">{errors.picture?.message}</p>
+          </div>
         )}
       />
 
@@ -214,8 +229,10 @@ const Form2 = () => {
         name="country"
         control={control}
         render={({ field }) => (
-          <>
-            <label htmlFor="country">Country</label>
+          <div>
+            <label htmlFor="country" className="label">
+              Country
+            </label>
             <select
               {...field}
               onBlur={() => onBlur('country')}
@@ -230,8 +247,8 @@ const Form2 = () => {
                 </option>
               ))}
             </select>
-            <p>{errors.country?.message}</p>
-          </>
+            <p className="validation-error">{errors.country?.message}</p>
+          </div>
         )}
       />
 

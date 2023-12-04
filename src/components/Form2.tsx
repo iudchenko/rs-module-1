@@ -44,7 +44,7 @@ const Form2 = () => {
     };
 
     // Handle form submission
-    console.log(formSubmission);
+    // console.log(formSubmission);
     dispatch(saveHookFormData(formSubmission));
     navigate('/');
   };
